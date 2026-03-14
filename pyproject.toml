@@ -1,35 +1,30 @@
 [project]
 name = "infonomics-research-system"
-version = "0.1.0"
-description = "Multi-agent PhD-level research system for infonomics and information economics"
+version = "0.2.0"
+description = "Multi-agent PhD-level research system for infonomics — operated by Claude Code"
 requires-python = ">=3.11"
 dependencies = [
-    "anthropic>=0.39.0",
     "pydantic>=2.0",
-    "pydantic-settings>=2.0",
     "rich>=13.0",
-    "tenacity>=8.0",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",
-    "pytest-asyncio>=0.23",
     "ruff>=0.4",
 ]
-research = [
+analysis = [
     "pandas>=2.0",
     "networkx>=3.0",
     "matplotlib>=3.8",
 ]
 
 [project.scripts]
-research = "src.cli:main"
+research-viewer = "src.viewer:main"
 
 [tool.ruff]
 line-length = 100
 target-version = "py311"
 
 [tool.pytest.ini_options]
-asyncio_mode = "auto"
 testpaths = ["tests"]

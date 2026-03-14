@@ -7,9 +7,5 @@ build/
 venv/
 .env
 *.log
-data/raw/*
-data/processed/*
-data/outputs/*
-!data/*/.gitkeep
 .ruff_cache/
 .pytest_cache/
