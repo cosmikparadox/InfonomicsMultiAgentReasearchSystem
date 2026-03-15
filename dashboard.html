@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infonomics Multi-Agent Research System — Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --sidebar-width: 260px;
+  --transition-speed: 0.25s;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #1c2128;
+  --border: #30363d;
+  --border-light: #3d444d;
+  --text-primary: #c9d1d9;
+  --text-secondary: #8b949e;
+  --text-heading: #e6edf3;
+  --accent: #58a6ff;
+  --accent-hover: #79b8ff;
+  --green: #3fb950;
+  --green-bg: rgba(63,185,80,0.12);
+  --amber: #d29922;
+  --amber-bg: rgba(210,153,34,0.12);
+  --red: #f85149;
+  --red-bg: rgba(248,81,73,0.12);
+  --grey: #484f58;
+  --grey-bg: rgba(72,79,88,0.15);
+  --purple: #bc8cff;
+  --shadow: 0 3px 12px rgba(0,0,0,0.4);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f6f8fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f3f6;
+  --border: #d0d7de;
+  --border-light: #e1e4e8;
+  --text-primary: #24292f;
+  --text-secondary: #57606a;
+  --text-heading: #1b1f24;
+  --accent: #0969da;
+  --accent-hover: #0550ae;
+  --green: #1a7f37;
+  --green-bg: rgba(26,127,55,0.08);
+  --amber: #9a6700;
+  --amber-bg: rgba(154,103,0,0.08);
+  --red: #cf222e;
+  --red-bg: rgba(207,34,46,0.08);
+  --grey: #6e7781;
+  --grey-bg: rgba(110,119,129,0.08);
+  --purple: #8250df;
+  --shadow: 0 3px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background var(--transition-speed), color var(--transition-speed);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SIDEBAR
+   ═══════════════════════════════════════════════════════════════ */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: transform var(--transition-speed), background var(--transition-speed);
+}
+
+.sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header h1 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.sidebar-header .subtitle {
+  font-size: 0.73rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 10px;
+  overflow-y: auto;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.87rem;
+  font-weight: 500;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+  background: var(--grey-bg);
+  color: var(--text-heading);
+}
+
+.sidebar-nav a.active {
+  color: var(--accent);
+}
+
+.sidebar-nav .nav-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.theme-toggle {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 14px; left: 14px;
+  z-index: 200;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MAIN CONTENT
+   ═══════════════════════════════════════════════════════════════ */
+.main {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  transition: margin var(--transition-speed);
+}
+
+.main-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 36px 80px;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 56px;
+}
+
+.section-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 6px;
+  letter-spacing: -0.015em;
+}
+
+.section-subtitle {
+  font-size: 0.87rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════════════════════════════ */
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.card:hover {
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 1: COMMAND CENTRE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Roadmap */
+.roadmap {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 28px;
+  position: relative;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.roadmap-step {
+  flex: 1;
+  min-width: 160px;
+  text-align: center;
+  position: relative;
+  padding: 0 8px;
+}
+
+.roadmap-step .step-circle {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin: 0 auto 10px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.2s;
+}
+
+.roadmap-step.active .step-circle {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(88,166,255,0.2);
+}
+
+.roadmap-step.locked .step-circle {
+  background: var(--grey-bg);
+  color: var(--grey);
+  border: 2px solid var(--border);
+}
+
+.roadmap-step .step-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 2px;
+}
+
+.roadmap-step.locked .step-label {
+  color: var(--text-secondary);
+}
+
+.roadmap-step .step-detail {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.roadmap-connector {
+  position: absolute;
+  top: 20px;
+  left: calc(50% + 24px);
+  right: calc(-50% + 24px);
+  height: 2px;
+  background: var(--border);
+  z-index: 1;
+}
+
+.roadmap-step.active .roadmap-connector {
+  background: var(--accent);
+}
+
+.roadmap-step:last-child .roadmap-connector { display: none; }
+
+/* Progress bar for roadmap */
+.roadmap-progress {
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  height: 8px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.roadmap-progress-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 0;
+}
+
+/* Stats bar */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+}
+
+.stat-value .stat-unit {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Empire grid */
+.empire-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.empire-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.empire-card:hover {
+  border-color: var(--border-light);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.empire-card.complete {
+  border-color: rgba(63,185,80,0.3);
+}
+
+.empire-card.complete:hover {
+  border-color: var(--green);
+}
+
+.empire-card .empire-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.empire-card .empire-scores {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.empire-card .score-item {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.empire-card .score-item .score-val {
+  font-weight: 700;
+  color: var(--text-heading);
+  font-size: 0.95rem;
+  display: block;
+}
+
+.empire-card.pending .score-val {
+  color: var(--grey) !important;
+}
+
+/* Status badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-green {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.badge-amber {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+
+.badge-grey {
+  background: var(--grey-bg);
+  color: var(--grey);
+}
+
+.badge-red {
+  background: var(--red-bg);
+  color: var(--red);
+}
+
+.badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.badge-green .badge-dot { background: var(--green); }
+.badge-amber .badge-dot { background: var(--amber); }
+.badge-grey .badge-dot { background: var(--grey); }
+
+.empire-card .report-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.empire-card .report-link:hover {
+  text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 2: RESEARCH ARCHITECTURE
+   ═══════════════════════════════════════════════════════════════ */
+.agent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.agent-chip {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.agent-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.agent-chip .agent-number {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 3px;
+}
+
+/* Quality gates pipeline */
+.pipeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  padding: 16px 0 20px;
+  margin-bottom: 24px;
+}
+
+.pipeline-gate {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  min-width: 130px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.pipeline-gate:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.pipeline-gate .gate-number {
+  font-size: 0.68rem;
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.pipeline-gate .gate-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.pipeline-arrow {
+  flex-shrink: 0;
+  color: var(--border-light);
+  font-size: 1.3rem;
+  padding: 0 6px;
+}
+
+/* Research standards */
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.standard-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.standard-item .std-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.standard-item .std-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 3: MATH FRAMEWORK
+   ═══════════════════════════════════════════════════════════════ */
+.layers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.layer-row {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.layer-label {
+  min-width: 260px;
+}
+
+.layer-label .layer-id {
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.layer-label .layer-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.layer-bar-wrap {
+  flex: 1;
+  min-width: 200px;
+}
+
+.layer-bar {
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  height: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.layer-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 0;
+}
+
+.layer-bar-fill.green { background: var(--green); }
+.layer-bar-fill.accent { background: var(--accent); }
+.layer-bar-fill.amber { background: var(--amber); }
+.layer-bar-fill.purple { background: var(--purple); }
+
+.layer-pct {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  min-width: 48px;
+  text-align: right;
+}
+
+/* Equation box */
+.equation-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 32px;
+  text-align: center;
+}
+
+.equation-box .eq-title {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.equation-box .eq-main {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.35rem;
+  color: var(--text-heading);
+  margin-bottom: 12px;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+.equation-box .eq-sub {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+.eq-var {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 4: DOCUMENT LIBRARY
+   ═══════════════════════════════════════════════════════════════ */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  transition: all 0.15s;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.doc-table thead th {
+  text-align: left;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.doc-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+.doc-table tbody tr:hover {
+  background: var(--bg-tertiary);
+}
+
+.doc-table td {
+  padding: 12px 14px;
+  font-size: 0.85rem;
+}
+
+.doc-table .doc-name {
+  font-weight: 600;
+  color: var(--text-heading);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.doc-table .type-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.type-audit { background: var(--amber-bg); color: var(--amber); }
+.type-counter { background: var(--red-bg); color: var(--red); }
+.type-analysis { background: rgba(88,166,255,0.12); color: var(--accent); }
+.type-gapfill { background: rgba(188,140,255,0.12); color: var(--purple); }
+.type-verification { background: var(--green-bg); color: var(--green); }
+.type-harvest { background: var(--amber-bg); color: var(--amber); }
+.type-metrics { background: var(--grey-bg); color: var(--text-secondary); }
+
+.doc-table .doc-empire {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.doc-table .doc-size {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION 5: PIPELINE STATUS
+   ═══════════════════════════════════════════════════════════════ */
+.status-header {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.status-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.status-card .sc-label {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.status-card .sc-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.status-indicator.idle { background: var(--green); }
+.status-indicator.running { background: var(--amber); }
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 transparent; }
+  50% { opacity: 0.7; box-shadow: 0 0 8px 2px var(--green); }
+}
+
+.queue-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.queue-chip {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.activity-log {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.activity-log .log-title {
+  padding: 14px 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  border-bottom: 1px solid var(--border);
+}
+
+.activity-log .log-entry {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.84rem;
+  color: var(--text-primary);
+  transition: background 0.1s;
+}
+
+.activity-log .log-entry:last-child { border-bottom: none; }
+.activity-log .log-entry:hover { background: var(--bg-tertiary); }
+
+.log-entry .log-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.log-entry .log-time {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  font-family: var(--font-mono);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MODAL
+   ═══════════════════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  max-width: 540px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-hover);
+  transform: translateY(12px);
+  transition: transform 0.2s;
+}
+
+.modal-overlay.open .modal {
+  transform: translateY(0);
+}
+
+.modal-header {
+  padding: 20px 24px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-close:hover { color: var(--text-heading); }
+
+.modal-body {
+  padding: 0 24px 24px;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 860px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+
+  .main-inner {
+    padding: 68px 18px 60px;
+  }
+
+  .empire-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .doc-table-wrap {
+    overflow-x: auto;
+  }
+
+  .pipeline {
+    gap: 0;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+/* Utility */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- HAMBURGER -->
+<button class="hamburger" id="hamburger" aria-label="Toggle navigation">&#9776;</button>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1>Infonomics MARS</h1>
+    <div class="subtitle">Multi-Agent Research System</div>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#command-centre" class="active" data-nav>
+      <span class="nav-icon">&#9881;</span> Command Centre
+    </a>
+    <a href="#architecture" data-nav>
+      <span class="nav-icon">&#9670;</span> Research Architecture
+    </a>
+    <a href="#math-framework" data-nav>
+      <span class="nav-icon">&#931;</span> Math Framework
+    </a>
+    <a href="#documents" data-nav>
+      <span class="nav-icon">&#128462;</span> Document Library
+    </a>
+    <a href="#pipeline" data-nav>
+      <span class="nav-icon">&#9654;</span> Pipeline Status
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <span style="font-size:0.73rem;color:var(--text-secondary);">v1.0.0</span>
+    <button class="theme-toggle" id="themeToggle">
+      <span id="themeIcon">&#9790;</span>
+      <span id="themeLabel">Light</span>
+    </button>
+  </div>
+</aside>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Agent Role</h3>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+<div class="main-inner">
+
+  <!-- SECTION 1: COMMAND CENTRE -->
+  <section class="section" id="command-centre">
+    <h2 class="section-title">Project Command Centre</h2>
+    <p class="section-subtitle">Track the Infonomics Knowledge Base build across 12 historical empires</p>
+
+    <!-- Roadmap -->
+    <div class="roadmap" role="list">
+      <div class="roadmap-step active" role="listitem">
+        <div class="roadmap-connector"></div>
+        <div class="step-circle">1</div>
+        <div class="step-label">Empire KB</div>
+        <div class="step-detail">1 / 12 complete &middot; 8%</div>
+      </div>
+      <div class="roadmap-step locked" role="listitem">
+        <div class="roadmap-connector"></div>
+        <div class="step-circle">2</div>
+        <div class="step-label">Cross-Empire</div>
+        <div class="step-detail">Locked</div>
+      </div>
+      <div class="roadmap-step locked" role="listitem">
+        <div class="roadmap-connector"></div>
+        <div class="step-circle">3</div>
+        <div class="step-label">Layer B/C Quant</div>
+        <div class="step-detail">Locked</div>
+      </div>
+      <div class="roadmap-step locked" role="listitem">
+        <div class="roadmap-connector"></div>
+        <div class="step-circle">4</div>
+        <div class="step-label">Network Model</div>
+        <div class="step-detail">Locked</div>
+      </div>
+      <div class="roadmap-step locked" role="listitem">
+        <div class="step-circle">5</div>
+        <div class="step-label">Publication</div>
+        <div class="step-detail">Locked</div>
+      </div>
+    </div>
+
+    <div class="roadmap-progress">
+      <div class="roadmap-progress-fill" data-target-width="8"></div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-value">12</div>
+        <div class="stat-label">Empires in Scope</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">~575K <span class="stat-unit">words</span></div>
+        <div class="stat-label">Total Research Output</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">56</div>
+        <div class="stat-label">Tier 1 Metrics</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">87.1</div>
+        <div class="stat-label">Avg DQS Score</div>
+      </div>
+    </div>
+
+    <!-- Empire grid -->
+    <div class="empire-grid" id="empireGrid"></div>
+  </section>
+
+  <!-- SECTION 2: RESEARCH ARCHITECTURE -->
+  <section class="section" id="architecture">
+    <h2 class="section-title">Research Architecture</h2>
+    <p class="section-subtitle">21 specialised agent roles and 7 quality gates power each empire analysis</p>
+
+    <div class="agent-grid" id="agentGrid"></div>
+
+    <h3 style="font-size:1rem;font-weight:700;color:var(--text-heading);margin-bottom:14px;">Quality Gate Pipeline</h3>
+    <div class="pipeline" id="pipelineFlow"></div>
+
+    <h3 style="font-size:1rem;font-weight:700;color:var(--text-heading);margin:24px 0 14px;">Research Standards</h3>
+    <div class="standards-grid">
+      <div class="standard-item">
+        <div class="std-label">Searches per Empire</div>
+        <div class="std-value">50 &ndash; 70</div>
+      </div>
+      <div class="standard-item">
+        <div class="std-label">Confidence Levels</div>
+        <div class="std-value">3 Tiers (High / Medium / Low)</div>
+      </div>
+      <div class="standard-item">
+        <div class="std-label">Citation Standard</div>
+        <div class="std-value">Named Scholars Required</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: MATH FRAMEWORK -->
+  <section class="section" id="math-framework">
+    <h2 class="section-title">Infonomics Math Framework</h2>
+    <p class="section-subtitle">Five-layer mathematical model for information-capital valuation</p>
+
+    <div class="layers-list" id="layersList"></div>
+
+    <div class="equation-box">
+      <div class="eq-title">Master Value Equation</div>
+      <div class="eq-main">
+        <span class="eq-var">V</span>(<span class="eq-var">t</span>)
+        = &Sigma;<sub><span class="eq-var">i</span></sub>
+        <span class="eq-var">w<sub>i</sub></span> &middot;
+        <span class="eq-var">D<sub>i</sub></span>(<span class="eq-var">t</span>)
+      </div>
+      <div class="eq-sub">
+        where &ensp;
+        d<span class="eq-var">D<sub>i</sub></span>/d<span class="eq-var">t</span>
+        = <span class="eq-var">&lambda;<sub>i</sub></span> &middot; <span class="eq-var">I</span>(<span class="eq-var">t</span>)
+        &minus; <span class="eq-var">&delta;<sub>i</sub></span> &middot; <span class="eq-var">D<sub>i</sub></span>(<span class="eq-var">t</span>)
+        + &Sigma;<sub><span class="eq-var">j</span></sub>
+        <span class="eq-var">&alpha;<sub>ij</sub></span> &middot; <span class="eq-var">D<sub>j</sub></span>(<span class="eq-var">t</span>)
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: DOCUMENT LIBRARY -->
+  <section class="section" id="documents">
+    <h2 class="section-title">Document Library</h2>
+    <p class="section-subtitle">All research outputs, metrics files, and audit reports</p>
+
+    <div class="filter-bar" id="filterBar"></div>
+
+    <div class="doc-table-wrap" style="overflow-x:auto;">
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>Filename</th>
+            <th>Type</th>
+            <th>Empire</th>
+            <th>Size</th>
+          </tr>
+        </thead>
+        <tbody id="docTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 5: PIPELINE STATUS -->
+  <section class="section" id="pipeline">
+    <h2 class="section-title">Pipeline Status</h2>
+    <p class="section-subtitle">Live system status and processing queue</p>
+
+    <div class="status-header">
+      <div class="status-card">
+        <div class="sc-label">Current Status</div>
+        <div class="sc-value">
+          <span class="status-indicator idle"></span>
+          Idle
+        </div>
+      </div>
+      <div class="status-card">
+        <div class="sc-label">Last Completed</div>
+        <div class="sc-value">Ottoman Empire &mdash; 15 Mar 2026</div>
+      </div>
+      <div class="status-card">
+        <div class="sc-label">Queue</div>
+        <div class="queue-list" id="queueList"></div>
+      </div>
+    </div>
+
+    <div class="activity-log">
+      <div class="log-title">Recent Activity</div>
+      <div id="activityLog"></div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<!-- JAVASCRIPT -->
+<script>
+(function() {
+  'use strict';
+
+  /* ─── DATA ─── */
+
+  var empires = [
+    { name: 'Ottoman', status: 'complete', dqs: 87.1, cas: 3.31, link: 'Ottoman_report.html' },
+    { name: 'Roman', status: 'pending', dqs: null, cas: null },
+    { name: 'British', status: 'pending', dqs: null, cas: null },
+    { name: 'Dutch', status: 'pending', dqs: null, cas: null },
+    { name: 'Spanish', status: 'pending', dqs: null, cas: null },
+    { name: 'Portuguese', status: 'pending', dqs: null, cas: null },
+    { name: 'Abbasid', status: 'pending', dqs: null, cas: null },
+    { name: 'Byzantine', status: 'pending', dqs: null, cas: null },
+    { name: 'Mongol', status: 'pending', dqs: null, cas: null },
+    { name: 'Tang', status: 'pending', dqs: null, cas: null },
+    { name: 'Venetian', status: 'pending', dqs: null, cas: null },
+    { name: 'American', status: 'pending', dqs: null, cas: null },
+    { name: 'CCP China', status: 'pending', dqs: null, cas: null }
+  ];
+
+  var agents = [
+    { id: 1, name: 'Literature Reviewer', desc: 'Surveys existing research, identifies seminal works, key theories, competing frameworks. Maps research gaps, open debates, and methodological approaches across the domain.' },
+    { id: 2, name: 'Theorist', desc: 'Develops theoretical frameworks and formal/semi-formal models. Builds on established information economics (Stiglitz, Akerlof, Shapley). Proposes testable predictions with explicit assumptions.' },
+    { id: 3, name: 'Critic', desc: 'Adversarially reviews all findings. Checks for logical fallacies, unstated assumptions, selection bias, overgeneralization, circular reasoning, and methodological issues. Assigns rigor scores.' },
+    { id: 4, name: 'Synthesizer', desc: 'Integrates all validated findings into coherent, publication-quality output. Resolves contradictions explicitly, states contributions, and proposes future research directions.' },
+    { id: 5, name: 'Auditor', desc: 'Performs comprehensive quality audits of completed empire analyses. Validates data integrity, citation accuracy, and internal consistency of all research outputs.' },
+    { id: 6, name: 'Counter-Evidence Agent', desc: 'Actively searches for evidence that contradicts or weakens established findings. Generates counter-arguments and identifies disconfirming cases systematically.' },
+    { id: 7, name: 'Gap-Fill Agent', desc: 'Identifies and fills gaps in the knowledge base by conducting targeted research on under-explored dimensions, missing time periods, and overlooked institutional factors.' },
+    { id: 8, name: 'Data Engineer', desc: 'Structures, validates, and normalises quantitative data. Manages metric hierarchies, ensures data quality standards, and produces clean datasets for analysis.' },
+    { id: 9, name: 'Hostile Reviewer', desc: 'Simulates the most adversarial peer reviewer. Attacks methodology, questions assumptions, challenges evidence quality, and identifies publication-blocking weaknesses.' },
+    { id: 10, name: 'Citation Verifier', desc: 'Validates all citations against known scholarly sources. Checks attribution accuracy, verifies named scholar associations, and flags unsupported claims.' },
+    { id: 11, name: 'Comparative Analyst', desc: 'Conducts cross-empire comparative analysis, identifying patterns, divergences, and causal relationships across different information-capital regimes.' },
+    { id: 12, name: 'Quantitative Modeller', desc: 'Translates qualitative CAS scores into quantitative models. Develops calibration methods, regression specifications, and econometric frameworks.' },
+    { id: 13, name: 'Network Analyst', desc: 'Maps information flow networks, trade route topologies, and knowledge diffusion patterns. Applies network science metrics to historical data.' },
+    { id: 14, name: 'Institutional Analyst', desc: 'Examines institutional structures governing information: bureaucracies, legal frameworks, property rights, censorship regimes, and knowledge monopolies.' },
+    { id: 15, name: 'Economic Historian', desc: 'Provides deep domain expertise on historical economic systems, trade patterns, monetary systems, and the economic context of information flows.' },
+    { id: 16, name: 'Methodology Specialist', desc: 'Designs and validates research methodologies. Ensures appropriate use of historical methods, counterfactual analysis, and causal inference techniques.' },
+    { id: 17, name: 'Taxonomy Designer', desc: 'Creates and maintains the classification systems for information capital dimensions, metric hierarchies, and domain ontologies.' },
+    { id: 18, name: 'Narrative Writer', desc: 'Transforms structured research findings into compelling, publication-ready prose. Ensures clarity, coherence, and appropriate academic register.' },
+    { id: 19, name: 'Visualization Agent', desc: 'Designs data visualizations, infographics, and diagrammatic representations of complex research findings and model outputs.' },
+    { id: 20, name: 'Calibration Agent', desc: 'Calibrates model parameters using historical evidence. Conducts sensitivity analysis and validates model outputs against known empirical benchmarks.' },
+    { id: 21, name: 'Publication Strategist', desc: 'Advises on publication strategy, target journals, framing for different audiences, and alignment with current debates in information economics.' }
+  ];
+
+  var qualityGates = [
+    'KB Audit', 'CAS Verification', 'Gap Fill',
+    'Counter-Evidence', 'Hostile Review', 'Data Harvest', 'Final Synthesis'
+  ];
+
+  var mathLayers = [
+    { id: 'Layer A', name: 'Qualitative CAS', pct: 100, color: 'green' },
+    { id: 'Layer A.5', name: 'Counter-Evidence', pct: 100, color: 'green' },
+    { id: 'Layer B', name: 'Quantitative Calibration', pct: 30, color: 'amber' },
+    { id: 'Layer C', name: 'Mathematical Formalization', pct: 75, color: 'accent' },
+    { id: 'Layer D', name: 'Network Dynamics', pct: 10, color: 'purple' }
+  ];
+
+  var documents = [
+    { name: 'Ottoman_Audit_Report.md', type: 'Audit', typeClass: 'type-audit', empire: 'Ottoman', size: '42 KB', filter: 'audit' },
+    { name: 'Ottoman_CAS_Counter_Evidence.md', type: 'Counter-Evidence', typeClass: 'type-counter', empire: 'Ottoman', size: '38 KB', filter: 'review' },
+    { name: 'Ottoman_CAS_Verified_v2.md', type: 'CAS Analysis', typeClass: 'type-analysis', empire: 'Ottoman', size: '156 KB', filter: 'analysis' },
+    { name: 'Ottoman_Domain_GapFill_Report.md', type: 'Gap-Fill', typeClass: 'type-gapfill', empire: 'Ottoman', size: '67 KB', filter: 'analysis' },
+    { name: 'Ottoman_Hostile_Review_Citation_Verification.md', type: 'Verification', typeClass: 'type-verification', empire: 'Ottoman', size: '29 KB', filter: 'review' },
+    { name: 'Ottoman_LayerB_ECO003-011_Harvest_Report.md', type: 'Data Harvest', typeClass: 'type-harvest', empire: 'Ottoman', size: '84 KB', filter: 'analysis' },
+    { name: 'Ottoman_LayerB_Economic_Metrics.csv', type: 'Metrics CSV', typeClass: 'type-metrics', empire: 'Ottoman', size: '12 KB', filter: 'metrics' },
+    { name: 'Ottoman_Metrics_Tier1.csv', type: 'Metrics CSV', typeClass: 'type-metrics', empire: 'Ottoman', size: '8 KB', filter: 'metrics' },
+    { name: 'ottoman_layer_b_governance_military_metrics.csv', type: 'Metrics CSV', typeClass: 'type-metrics', empire: 'Ottoman', size: '6 KB', filter: 'metrics' }
+  ];
+
+  var filterTypes = [
+    { label: 'All', value: 'all' },
+    { label: 'Analysis', value: 'analysis' },
+    { label: 'Metrics', value: 'metrics' },
+    { label: 'Audit', value: 'audit' },
+    { label: 'Review', value: 'review' }
+  ];
+
+  var queueEmpires = ['Roman', 'British', 'Dutch', 'Spanish', 'Portuguese', 'Abbasid', 'Byzantine', 'Mongol', 'Tang', 'Venetian', 'American', 'CCP China'];
+
+  var activityLog = [
+    { text: 'Ottoman_Empire_CAS_Analysis_FINAL.md generated', time: '15 Mar 14:32' },
+    { text: 'Ottoman hostile review + citation verification complete', time: '15 Mar 13:47' },
+    { text: 'Ottoman counter-evidence report (27 arguments) generated', time: '15 Mar 12:15' },
+    { text: 'Ottoman Layer B economic metrics harvested (47 rows)', time: '15 Mar 10:58' },
+    { text: 'Ottoman CAS Verified v2 published (DQS 87.1)', time: '15 Mar 09:23' }
+  ];
+
+  /* ─── RENDER FUNCTIONS ─── */
+
+  function renderEmpires() {
+    var grid = document.getElementById('empireGrid');
+    grid.innerHTML = empires.map(function(e) {
+      var isComplete = e.status === 'complete';
+      var cls = isComplete ? 'empire-card complete' : 'empire-card pending';
+      var badge = isComplete
+        ? '<span class="badge badge-green"><span class="badge-dot"></span>Complete</span>'
+        : '<span class="badge badge-grey"><span class="badge-dot"></span>Pending</span>';
+      var scores = isComplete
+        ? '<div class="empire-scores">' +
+            '<div class="score-item">DQS<span class="score-val">' + e.dqs + '</span></div>' +
+            '<div class="score-item">CAS<span class="score-val">' + e.cas + '</span></div>' +
+          '</div>'
+        : '<div class="empire-scores">' +
+            '<div class="score-item">DQS<span class="score-val">&mdash;</span></div>' +
+            '<div class="score-item">CAS<span class="score-val">&mdash;</span></div>' +
+          '</div>';
+      var link = isComplete
+        ? '<a href="' + e.link + '" class="report-link">View Report &rarr;</a>'
+        : '';
+      return '<div class="' + cls + '">' +
+        '<div class="empire-name">' + e.name + badge + '</div>' +
+        scores +
+        link +
+      '</div>';
+    }).join('');
+  }
+
+  function renderAgents() {
+    var grid = document.getElementById('agentGrid');
+    grid.innerHTML = agents.map(function(a) {
+      return '<div class="agent-chip" data-agent="' + a.id + '" tabindex="0">' +
+        '<span class="agent-number">Agent ' + String(a.id).padStart(2, '0') + '</span>' +
+        a.name +
+      '</div>';
+    }).join('');
+
+    grid.addEventListener('click', function(e) {
+      var chip = e.target.closest('.agent-chip');
+      if (!chip) return;
+      var agent = agents.find(function(a) { return a.id === parseInt(chip.dataset.agent); });
+      if (agent) openModal(agent.name, agent.desc);
+    });
+
+    grid.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.target.click();
+      }
+    });
+  }
+
+  function renderPipeline() {
+    var flow = document.getElementById('pipelineFlow');
+    flow.innerHTML = qualityGates.map(function(g, i) {
+      var arrow = i < qualityGates.length - 1 ? '<span class="pipeline-arrow">&#9654;</span>' : '';
+      return '<div class="pipeline-gate">' +
+        '<div class="gate-number">Gate ' + (i + 1) + '</div>' +
+        '<div class="gate-name">' + g + '</div>' +
+      '</div>' + arrow;
+    }).join('');
+  }
+
+  function renderLayers() {
+    var list = document.getElementById('layersList');
+    list.innerHTML = mathLayers.map(function(l) {
+      return '<div class="layer-row">' +
+        '<div class="layer-label">' +
+          '<div class="layer-id">' + l.id + '</div>' +
+          '<div class="layer-name">' + l.name + '</div>' +
+        '</div>' +
+        '<div class="layer-bar-wrap">' +
+          '<div class="layer-bar">' +
+            '<div class="layer-bar-fill ' + l.color + '" data-target-width="' + l.pct + '"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="layer-pct">' + l.pct + '%</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function renderDocuments(filter) {
+    filter = filter || 'all';
+    var tbody = document.getElementById('docTableBody');
+    var filtered = filter === 'all' ? documents : documents.filter(function(d) { return d.filter === filter; });
+    tbody.innerHTML = filtered.map(function(d) {
+      return '<tr>' +
+        '<td class="doc-name">' + d.name + '</td>' +
+        '<td><span class="type-badge ' + d.typeClass + '">' + d.type + '</span></td>' +
+        '<td class="doc-empire">' + d.empire + '</td>' +
+        '<td class="doc-size">' + d.size + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function renderFilters() {
+    var bar = document.getElementById('filterBar');
+    bar.innerHTML = filterTypes.map(function(f) {
+      return '<button class="filter-btn' + (f.value === 'all' ? ' active' : '') + '" data-filter="' + f.value + '">' + f.label + '</button>';
+    }).join('');
+
+    bar.addEventListener('click', function(e) {
+      var btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      bar.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderDocuments(btn.dataset.filter);
+    });
+  }
+
+  function renderQueue() {
+    var list = document.getElementById('queueList');
+    list.innerHTML = queueEmpires.map(function(e) {
+      return '<span class="queue-chip">' + e + '</span>';
+    }).join('');
+  }
+
+  function renderActivityLog() {
+    var log = document.getElementById('activityLog');
+    log.innerHTML = activityLog.map(function(e) {
+      return '<div class="log-entry">' +
+        '<span class="log-dot"></span>' +
+        '<div>' +
+          '<div>' + e.text + '</div>' +
+          '<div class="log-time">' + e.time + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  /* ─── MODAL ─── */
+
+  function openModal(title, body) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').textContent = body;
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === e.currentTarget) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  /* ─── THEME TOGGLE ─── */
+
+  var html = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  var themeIcon = document.getElementById('themeIcon');
+  var themeLabel = document.getElementById('themeLabel');
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('imars-theme', theme);
+    if (theme === 'dark') {
+      themeIcon.innerHTML = '&#9790;';
+      themeLabel.textContent = 'Light';
+    } else {
+      themeIcon.innerHTML = '&#9728;';
+      themeLabel.textContent = 'Dark';
+    }
+  }
+
+  themeBtn.addEventListener('click', function() {
+    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+  });
+
+  var saved = localStorage.getItem('imars-theme');
+  if (saved) setTheme(saved);
+
+  /* ─── SIDEBAR NAV ACTIVE STATE ─── */
+
+  var navLinks = document.querySelectorAll('[data-nav]');
+  var sections = document.querySelectorAll('.section');
+
+  function updateActiveNav() {
+    var current = '';
+    sections.forEach(function(s) {
+      var top = s.offsetTop - 120;
+      if (window.scrollY >= top) current = s.id;
+    });
+    navLinks.forEach(function(a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+  /* ─── HAMBURGER ─── */
+
+  var hamburger = document.getElementById('hamburger');
+  var sidebar = document.getElementById('sidebar');
+
+  hamburger.addEventListener('click', function() {
+    sidebar.classList.toggle('open');
+  });
+
+  navLinks.forEach(function(a) {
+    a.addEventListener('click', function() {
+      if (window.innerWidth <= 860) sidebar.classList.remove('open');
+    });
+  });
+
+  /* ─── ANIMATE PROGRESS BARS ON INTERSECTION ─── */
+
+  function animateBars() {
+    var bars = document.querySelectorAll('[data-target-width]');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var target = entry.target.dataset.targetWidth;
+          setTimeout(function() {
+            entry.target.style.width = target + '%';
+          }, 150);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    bars.forEach(function(bar) { observer.observe(bar); });
+  }
+
+  /* ─── INIT ─── */
+
+  renderEmpires();
+  renderAgents();
+  renderPipeline();
+  renderLayers();
+  renderFilters();
+  renderDocuments('all');
+  renderQueue();
+  renderActivityLog();
+  animateBars();
+  updateActiveNav();
+
+})();
+</script>
+</body>
+</html>

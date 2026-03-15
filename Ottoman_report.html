@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ottoman Empire — Complex Adaptive Systems Analysis Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+<style>
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --text-muted: #8b949e;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --amber: #d29922;
+  --red: #f85149;
+  --white: #f0f6fc;
+}
+[data-theme="light"] {
+  --bg: #f6f8fa;
+  --card: #ffffff;
+  --border: #d0d7de;
+  --text: #1f2328;
+  --text-muted: #656d76;
+  --accent: #0969da;
+  --green: #1a7f37;
+  --amber: #9a6700;
+  --red: #cf222e;
+  --white: #1f2328;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; gap: 8px;
+  overflow-x: auto; white-space: nowrap;
+  height: 48px;
+}
+nav a {
+  color: var(--text-muted); text-decoration: none; font-size: 13px;
+  padding: 12px 8px; border-bottom: 2px solid transparent;
+  transition: all .2s;
+}
+nav a:hover, nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+nav .spacer { flex: 1; }
+#themeToggle {
+  background: none; border: 1px solid var(--border); color: var(--text);
+  border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 13px;
+}
+/* LAYOUT */
+.container { max-width: 1280px; margin: 0 auto; padding: 24px; }
+section { margin-bottom: 48px; }
+h1 { font-size: 28px; color: var(--white); margin-bottom: 4px; }
+h2 { font-size: 22px; color: var(--white); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 17px; color: var(--white); margin: 16px 0 8px; }
+.subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; }
+/* CARDS */
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 20px; margin-bottom: 16px;
+}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+/* KPI */
+.kpi { text-align: center; padding: 24px 16px; }
+.kpi .value { font-size: 36px; font-weight: 700; color: var(--accent); }
+.kpi .label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.kpi .sub { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+/* TABLE */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--card); color: var(--accent); text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); position: sticky; top: 0; cursor: pointer; }
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+tr:hover td { background: rgba(88,166,255,0.04); }
+.conf-HIGH { color: var(--green); font-weight: 600; }
+.conf-MODERATE { color: var(--amber); font-weight: 600; }
+.conf-LOW { color: var(--red); font-weight: 600; }
+/* BADGES */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.badge-strong { background: rgba(248,81,73,.15); color: var(--red); }
+.badge-moderate { background: rgba(210,153,34,.15); color: var(--amber); }
+.badge-weak { background: rgba(63,185,80,.15); color: var(--green); }
+/* SEARCH */
+.search-box { width: 100%; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 13px; margin-bottom: 12px; }
+.search-box:focus { outline: none; border-color: var(--accent); }
+/* ACCORDION */
+.accordion-header {
+  background: var(--card); border: 1px solid var(--border); border-radius: 6px;
+  padding: 14px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 4px; font-weight: 600; color: var(--white); font-size: 15px;
+  transition: background .2s;
+}
+.accordion-header:hover { background: rgba(88,166,255,0.06); }
+.accordion-header .arrow { transition: transform .2s; }
+.accordion-header.open .arrow { transform: rotate(90deg); }
+.accordion-body { display: none; padding: 8px 0 16px; }
+.accordion-body.open { display: block; }
+.counter-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: 16px; margin-bottom: 10px;
+}
+.counter-card .scholar { font-weight: 700; color: var(--accent); }
+.counter-card .effect { font-size: 13px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+/* CASCADE */
+.cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 0; justify-content: center; padding: 20px 0; }
+.cascade-box {
+  background: var(--card); border: 2px solid var(--border); border-radius: 8px;
+  padding: 12px 16px; text-align: center; min-width: 130px; position: relative;
+}
+.cascade-box .domain { font-weight: 700; font-size: 13px; color: var(--white); }
+.cascade-box .date { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.cascade-arrow { font-size: 24px; color: var(--red); padding: 0 4px; flex-shrink: 0; }
+/* CHART */
+.chart-container { position: relative; width: 100%; }
+.chart-container canvas { max-height: 400px; }
+/* SCORE TABLE */
+.score-table th, .score-table td { text-align: center; padding: 10px 16px; }
+.score-table td:first-child, .score-table th:first-child { text-align: left; }
+/* MINSKY NARRATIVE */
+.minsky-phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 16px; }
+@media (max-width: 900px) { .minsky-phases { grid-template-columns: 1fr; } }
+.minsky-phase { border-radius: 8px; padding: 16px; }
+.minsky-hedge { background: rgba(63,185,80,0.1); border: 1px solid var(--green); }
+.minsky-spec { background: rgba(210,153,34,0.1); border: 1px solid var(--amber); }
+.minsky-ponzi { background: rgba(248,81,73,0.1); border: 1px solid var(--red); }
+/* BIB */
+.bib-entry { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.bib-cat { font-weight: 700; color: var(--accent); margin: 20px 0 8px; font-size: 15px; }
+/* BACK LINK */
+.back-link { color: var(--accent); text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
+.back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="dashboard.html" class="back-link">&larr; Dashboard</a>
+  <a href="#executive">Executive</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#radar">Radar</a>
+  <a href="#cascade">Cascade</a>
+  <a href="#metrics">Metrics</a>
+  <a href="#minsky">Minsky</a>
+  <a href="#counter">Counter-Evidence</a>
+  <a href="#rawdata">Raw Data</a>
+  <a href="#bibliography">Bibliography</a>
+  <span class="spacer"></span>
+  <button id="themeToggle" onclick="toggleTheme()">&#9788; Light</button>
+</nav>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: EXECUTIVE SUMMARY -->
+<!-- ============================================================ -->
+<section id="executive">
+<h1>Ottoman Empire &mdash; Complex Adaptive Systems Analysis</h1>
+<p class="subtitle">Multi-domain longitudinal assessment across 623 years (1299&ndash;1922)</p>
+
+<div class="grid-3">
+  <div class="card kpi">
+    <div class="value">3.31</div>
+    <div class="label">CAS Composite Score (out of 5)</div>
+    <div class="sub">Rise 3.67 &bull; Peak 3.83 &bull; Decline 2.44</div>
+  </div>
+  <div class="card kpi">
+    <div class="value">87.1</div>
+    <div class="label">Data Quality Score (out of 100)</div>
+    <div class="sub">Completeness 22.3 &bull; Source 22.5 &bull; Confidence 19.0 &bull; Verification 10.5 &bull; Documentation 12.8</div>
+  </div>
+  <div class="card kpi">
+    <div class="value" style="font-size:28px;">9 &times; 3</div>
+    <div class="label">Domains &times; Phases Analyzed</div>
+    <div class="sub">27 domain-phase intersections scored</div>
+  </div>
+</div>
+
+<div class="card">
+<h3>Key Findings</h3>
+<ol style="padding-left:20px; margin-top:8px;">
+  <li><strong>Economic/Fiscal domain showed first stress in 1585</strong> &mdash; the Great Debasement preceded military, governance, and information failures by decades, establishing the economic domain as the lead indicator of systemic decline.</li>
+  <li><strong>Textbook Minsky moment 1854&ndash;1875</strong> &mdash; the Ottoman debt trajectory from zero external borrowing to sovereign default in 21 years maps precisely onto Minsky&rsquo;s hedge &rarr; speculative &rarr; Ponzi finance framework.</li>
+  <li><strong>Information infrastructure collapse preceded political dissolution</strong> &mdash; the degradation of the ulak-menzilhane communication system and failure to adopt print technology created critical feedback-loop failures before territorial losses accelerated.</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>CAS Domain Scores</h3>
+<div class="table-wrap">
+<table class="score-table">
+<thead>
+<tr><th>Domain</th><th>Rise</th><th>Peak</th><th>Decline</th><th>Overall</th></tr>
+</thead>
+<tbody>
+<tr><td>Governance/Political</td><td>4.0</td><td>4.5</td><td>2.5</td><td>3.7</td></tr>
+<tr><td>Legal/Institutional</td><td>4.0</td><td>4.0</td><td>2.0</td><td>3.3</td></tr>
+<tr><td>Military/Defense</td><td>4.5</td><td>4.0</td><td>2.5</td><td>3.7</td></tr>
+<tr><td>Economic/Fiscal</td><td>3.5</td><td>3.5</td><td>2.0</td><td>3.0</td></tr>
+<tr><td>Social/Class</td><td>3.5</td><td>3.5</td><td>2.5</td><td>3.2</td></tr>
+<tr><td>Educational/Knowledge</td><td>3.0</td><td>3.5</td><td>2.0</td><td>2.8</td></tr>
+<tr><td>Cultural/Ideological</td><td>3.5</td><td>4.5</td><td>3.5</td><td>3.8</td></tr>
+<tr><td>Technological/Innovation</td><td>4.0</td><td>3.5</td><td>2.5</td><td>3.3</td></tr>
+<tr><td>Information/Communication</td><td>3.0</td><td>3.5</td><td>2.5</td><td>3.0</td></tr>
+</tbody>
+<tfoot>
+<tr style="font-weight:700; border-top:2px solid var(--border);"><td>Phase Average</td><td style="color:var(--green)">3.67</td><td style="color:var(--amber)">3.83</td><td style="color:var(--red)">2.44</td><td style="color:var(--accent)">3.31</td></tr>
+</tfoot>
+</table>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: PHASE TIMELINE -->
+<!-- ============================================================ -->
+<section id="timeline">
+<h2>Phase Timeline</h2>
+<div class="card">
+<div class="chart-container" style="height:260px;">
+  <canvas id="timelineChart"></canvas>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: CAS DOMAIN RADAR CHART -->
+<!-- ============================================================ -->
+<section id="radar">
+<h2>CAS Domain Radar</h2>
+<div class="card">
+<div class="chart-container" style="max-width:700px; margin:0 auto;">
+  <canvas id="radarChart"></canvas>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: DOMAIN CASCADE DIAGRAM -->
+<!-- ============================================================ -->
+<section id="cascade">
+<h2>Domain Failure Cascade</h2>
+<div class="card">
+<p style="color:var(--text-muted); margin-bottom:16px; font-size:14px;">Sequential domain failure propagation &mdash; each domain&rsquo;s initial stress point triggered cascading effects into adjacent systems.</p>
+<div class="cascade">
+  <div class="cascade-box" style="border-color:var(--red);"><div class="domain">ECONOMIC / FISCAL</div><div class="date">1585</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:var(--red);"><div class="domain">MILITARY</div><div class="date">1590&ndash;1600</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:var(--red);"><div class="domain">GOVERNANCE</div><div class="date">1617&ndash;1622</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:var(--amber);"><div class="domain">INFORMATION</div><div class="date">~1715</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:var(--amber);"><div class="domain">EDUCATIONAL</div><div class="date">1730s</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:var(--amber);"><div class="domain">TECHNOLOGICAL</div><div class="date">1680s&ndash;1730s</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:var(--amber);"><div class="domain">SOCIAL</div><div class="date">1750s&ndash;1800s</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:var(--amber);"><div class="domain">CULTURAL</div><div class="date">1830s&ndash;1908</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:var(--red);"><div class="domain">LEGAL</div><div class="date">1838&ndash;1881</div></div>
+  <div class="cascade-arrow">&rarr;</div>
+  <div class="cascade-box" style="border-color:#f85149; background:rgba(248,81,73,0.1);"><div class="domain">TERMINAL</div><div class="date">1908&ndash;1922</div></div>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: TIER 1 METRICS DASHBOARD -->
+<!-- ============================================================ -->
+<section id="metrics">
+<h2>Tier 1 Metrics Dashboard</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>Currency Debasement (ECO-009)</h3>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Silver content of the akce over six centuries</p>
+    <div class="chart-container"><canvas id="debasementChart"></canvas></div>
+  </div>
+  <div class="card">
+    <h3>Government Debt / GDP (ECO-005)</h3>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">External sovereign debt as percentage of GDP</p>
+    <div class="chart-container"><canvas id="debtChart"></canvas></div>
+  </div>
+  <div class="card">
+    <h3>Defence Spending (MIL-003)</h3>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Military expenditure as percentage of total budget</p>
+    <div class="chart-container"><canvas id="defenceChart"></canvas></div>
+  </div>
+  <div class="card">
+    <h3>Banking Development (ECO-010)</h3>
+    <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">Financial institutional sophistication score (1&ndash;5 scale)</p>
+    <div class="chart-container"><canvas id="bankingChart"></canvas></div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: MINSKY MOMENT ANALYSIS -->
+<!-- ============================================================ -->
+<section id="minsky">
+<h2>Minsky Moment Analysis</h2>
+<div class="card">
+<div class="chart-container"><canvas id="minskyChart"></canvas></div>
+<div class="minsky-phases">
+  <div class="minsky-phase minsky-hedge">
+    <h3 style="color:var(--green);">Hedge Finance (1299&ndash;1520)</h3>
+    <p style="font-size:14px;">Zero external borrowing. Fiscal deficits managed through the timar system and occasional currency debasement. Income from conquest covered current expenditure and principal obligations. The empire operated as a self-financing military-fiscal state.</p>
+  </div>
+  <div class="minsky-phase minsky-spec">
+    <h3 style="color:var(--amber);">Speculative Finance (1520&ndash;1854)</h3>
+    <p style="font-size:14px;">Revenue covered operating expenses but not the growing structural gap. Debasement accelerated as implicit taxation. Short-term borrowing from Galata sarrafs and esham life annuities (from 1775) bridged deficits. The empire could service interest but relied on rolling over obligations and debasing the currency to cover principal shortfalls.</p>
+  </div>
+  <div class="minsky-phase minsky-ponzi">
+    <h3 style="color:var(--red);">Ponzi Finance (1854&ndash;1875)</h3>
+    <p style="font-size:14px;">Fifteen foreign loans in 21 years. New borrowing required to service existing debt. By 1874, Galata bankers refused to lend even at 25% &mdash; the textbook credit-collapse moment. Annual debt service consumed 50%+ of state revenue. Default declared October 1875. The Decree of Muharrem (1881) surrendered fiscal sovereignty to the OPDA.</p>
+  </div>
+</div>
+<p style="margin-top:16px; color:var(--text-muted); font-size:13px;"><strong>Minsky Moment:</strong> 1874 &mdash; Galata bankers refused lending at 25%, marking total credit-market collapse. The preceding trajectory (zero debt &rarr; 100&ndash;150% debt/GDP in two decades) is among the most compressed sovereign Minsky cycles in economic history.</p>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: COUNTER-EVIDENCE PANEL -->
+<!-- ============================================================ -->
+<section id="counter">
+<h2>Counter-Evidence Panel</h2>
+<p style="color:var(--text-muted); margin-bottom:16px; font-size:14px;">Scholarly challenges to the standard CAS narrative, organized by domain. Each entry rates the strength of counter-evidence and its effect on the framework.</p>
+
+<div id="accordionContainer"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: RAW DATA TABLES -->
+<!-- ============================================================ -->
+<section id="rawdata">
+<h2>Raw Data Tables</h2>
+
+<div class="card">
+<h3>Tier 1 Economic &amp; Governance Metrics (Ottoman_Metrics_Tier1.csv)</h3>
+<input type="text" class="search-box" id="searchTier1" placeholder="Search metrics, phases, sources...">
+<div class="table-wrap">
+<table id="tableTier1">
+<thead>
+<tr><th>Metric ID</th><th>Phase</th><th>Year</th><th>Value</th><th>Unit</th><th>Confidence</th><th>Primary Source</th></tr>
+</thead>
+<tbody id="tbodyTier1"></tbody>
+</table>
+</div>
+</div>
+
+<div class="card" style="margin-top:16px;">
+<h3>Layer B Governance &amp; Military Metrics</h3>
+<input type="text" class="search-box" id="searchLayerB" placeholder="Search metrics, phases, sources...">
+<div class="table-wrap">
+<table id="tableLayerB">
+<thead>
+<tr><th>Metric ID</th><th>Phase</th><th>Year</th><th>Value</th><th>Unit</th><th>Confidence</th><th>Primary Source</th></tr>
+</thead>
+<tbody id="tbodyLayerB"></tbody>
+</table>
+</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: BIBLIOGRAPHY -->
+<!-- ============================================================ -->
+<section id="bibliography">
+<h2>Bibliography</h2>
+<div class="card" id="bibContent"></div>
+</section>
+
+</div><!-- /container -->
+
+<script>
+// ============================
+// THEME TOGGLE
+// ============================
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.innerHTML = '&#9789; Dark';
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.innerHTML = '&#9788; Light';
+  }
+  // Redraw charts for theme
+  Object.values(Chart.instances).forEach(c => c.update());
+}
+
+// ============================
+// CHART COLORS HELPER
+// ============================
+const C = { green: '#3fb950', amber: '#d29922', red: '#f85149', accent: '#58a6ff', text: '#c9d1d9', grid: '#30363d' };
+
+// ============================
+// SECTION 2: TIMELINE CHART
+// ============================
+(function(){
+  const ctx = document.getElementById('timelineChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Rise', 'Peak', 'Decline'],
+      datasets: [{
+        data: [
+          [1299, 1520],
+          [1520, 1683],
+          [1683, 1922]
+        ],
+        backgroundColor: [C.green, C.amber, C.red],
+        borderRadius: 4,
+        barPercentage: 0.6
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        annotation: {
+          annotations: {
+            l1299: { type:'line', xMin:1299, xMax:1299, borderColor:'#8b949e', borderWidth:1, borderDash:[4,4], label:{display:true, content:'1299', position:'start', font:{size:10}, color:'#8b949e'} },
+            l1453: { type:'line', xMin:1453, xMax:1453, borderColor:C.accent, borderWidth:2, label:{display:true, content:'1453 Constantinople', position:'start', font:{size:10}, color:C.accent} },
+            l1520: { type:'line', xMin:1520, xMax:1520, borderColor:'#8b949e', borderWidth:1, borderDash:[4,4], label:{display:true, content:'1520', position:'start', font:{size:10}, color:'#8b949e'} },
+            l1585: { type:'line', xMin:1585, xMax:1585, borderColor:C.red, borderWidth:2, label:{display:true, content:'1585 Debasement', position:'start', font:{size:10}, color:C.red} },
+            l1683: { type:'line', xMin:1683, xMax:1683, borderColor:C.amber, borderWidth:2, label:{display:true, content:'1683 Vienna', position:'start', font:{size:10}, color:C.amber} },
+            l1838: { type:'line', xMin:1838, xMax:1838, borderColor:C.amber, borderWidth:1, borderDash:[4,4], label:{display:true, content:'1838 Balta Liman', position:'end', font:{size:10}, color:C.amber} },
+            l1875: { type:'line', xMin:1875, xMax:1875, borderColor:C.red, borderWidth:2, label:{display:true, content:'1875 Default', position:'end', font:{size:10}, color:C.red} },
+            l1922: { type:'line', xMin:1922, xMax:1922, borderColor:'#8b949e', borderWidth:1, borderDash:[4,4], label:{display:true, content:'1922', position:'end', font:{size:10}, color:'#8b949e'} }
+          }
+        }
+      },
+      scales: {
+        x: { min: 1280, max: 1940, ticks: { color: '#8b949e' }, grid: { color: 'rgba(48,54,61,0.5)' } },
+        y: { ticks: { color: '#c9d1d9', font:{ weight:'bold' } }, grid: { display: false } }
+      }
+    }
+  });
+})();
+
+// ============================
+// SECTION 3: RADAR CHART
+// ============================
+(function(){
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  const labels = ['Governance','Legal','Military','Economic','Social','Educational','Cultural','Technology','Information'];
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: labels,
+      datasets: [
+        { label:'Rise', data:[4.0,4.0,4.5,3.5,3.5,3.0,3.5,4.0,3.0], borderColor:C.green, backgroundColor:'rgba(63,185,80,0.15)', pointBackgroundColor:C.green, borderWidth:2 },
+        { label:'Peak', data:[4.5,4.0,4.0,3.5,3.5,3.5,4.5,3.5,3.5], borderColor:C.amber, backgroundColor:'rgba(210,153,34,0.15)', pointBackgroundColor:C.amber, borderWidth:2 },
+        { label:'Decline', data:[2.5,2.0,2.5,2.0,2.5,2.0,3.5,2.5,2.5], borderColor:C.red, backgroundColor:'rgba(248,81,73,0.15)', pointBackgroundColor:C.red, borderWidth:2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          min: 0, max: 5,
+          ticks: { stepSize: 1, color: '#8b949e', backdropColor: 'transparent' },
+          grid: { color: 'rgba(48,54,61,0.6)' },
+          angleLines: { color: 'rgba(48,54,61,0.6)' },
+          pointLabels: { color: '#c9d1d9', font: { size: 12 } }
+        }
+      },
+      plugins: { legend: { labels: { color: '#c9d1d9' } } }
+    }
+  });
+})();
+
+// ============================
+// SECTION 5: TIER 1 METRIC CHARTS
+// ============================
+// Debasement
+(function(){
+  const ctx = document.getElementById('debasementChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [1326,1444,1481,1520,1585,1600,1640,1700,1800,1810,1840],
+      datasets: [{ label:'Silver content (g)', data:[1.15,0.77,0.73,0.68,0.38,0.29,0.30,0.13,0.048,0.032,0.008], borderColor:C.red, backgroundColor:'rgba(248,81,73,0.1)', fill:true, tension:0.3, pointRadius:4, pointBackgroundColor:C.red }]
+    },
+    options: {
+      responsive:true,
+      plugins:{ legend:{ labels:{ color:'#c9d1d9' } } },
+      scales:{
+        x:{ ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' } },
+        y:{ title:{ display:true, text:'Silver content (grams)', color:'#8b949e' }, ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' } }
+      }
+    }
+  });
+})();
+// Debt
+(function(){
+  const ctx = document.getElementById('debtChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['1520','1683','1854','1875','1881','1914'],
+      datasets: [{ label:'Debt/GDP %', data:[0,0,13,125,62.5,100], backgroundColor:[C.green,C.green,C.amber,C.red,C.amber,C.red], borderRadius:4 }]
+    },
+    options: {
+      responsive:true,
+      plugins:{ legend:{ labels:{ color:'#c9d1d9' } } },
+      scales:{
+        x:{ ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' } },
+        y:{ title:{ display:true, text:'Debt / GDP (%)', color:'#8b949e' }, ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' } }
+      }
+    }
+  });
+})();
+// Defence
+(function(){
+  const ctx = document.getElementById('defenceChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [1500,1527,1630,1670,1785],
+      datasets: [{ label:'% of budget', data:[55,56.5,77,62.5,75], borderColor:C.amber, backgroundColor:'rgba(210,153,34,0.1)', fill:true, tension:0.3, pointRadius:5, pointBackgroundColor:C.amber }]
+    },
+    options: {
+      responsive:true,
+      plugins:{ legend:{ labels:{ color:'#c9d1d9' } } },
+      scales:{
+        x:{ ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' } },
+        y:{ title:{ display:true, text:'% of Total Budget', color:'#8b949e' }, ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' }, min:40, max:85 }
+      }
+    }
+  });
+})();
+// Banking
+(function(){
+  const ctx = document.getElementById('bankingChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [1400,1520,1600,1700,1840,1863,1900],
+      datasets: [{ label:'Score (1-5)', data:[1.0,1.0,1.5,1.5,1.5,2.5,3.0], borderColor:C.accent, backgroundColor:'rgba(88,166,255,0.1)', fill:true, stepped:'before', pointRadius:5, pointBackgroundColor:C.accent }]
+    },
+    options: {
+      responsive:true,
+      plugins:{ legend:{ labels:{ color:'#c9d1d9' } } },
+      scales:{
+        x:{ ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' } },
+        y:{ title:{ display:true, text:'Score (1-5)', color:'#8b949e' }, ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' }, min:0, max:5 }
+      }
+    }
+  });
+})();
+
+// ============================
+// SECTION 6: MINSKY CHART
+// ============================
+(function(){
+  const ctx = document.getElementById('minskyChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [1299,1400,1500,1520,1585,1650,1700,1775,1820,1854,1860,1870,1874,1875,1881,1900,1914],
+      datasets: [
+        { label:'Debt/GDP %', data:[0,0,0,0,0,0,0,0,0,13,30,70,120,125,62.5,80,100], borderColor:C.red, backgroundColor:'rgba(248,81,73,0.05)', fill:true, tension:0.3, pointRadius:4, pointBackgroundColor:C.red },
+        { label:'Hedge Zone', data:[0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null], borderColor:C.green, backgroundColor:'rgba(63,185,80,0.15)', fill:true, tension:0, pointRadius:0 },
+        { label:'Speculative Zone', data:[null,null,null,0,0,0,0,0,0,0,null,null,null,null,null,null,null], borderColor:C.amber, backgroundColor:'rgba(210,153,34,0.1)', fill:true, tension:0, pointRadius:0 },
+      ]
+    },
+    options: {
+      responsive:true,
+      plugins:{
+        legend:{ labels:{ color:'#c9d1d9' } },
+        annotation:{
+          annotations:{
+            minsky:{
+              type:'line', xMin:13, xMax:13, borderColor:C.red, borderWidth:3, borderDash:[6,3],
+              label:{ display:true, content:'MINSKY MOMENT 1874', color:C.red, font:{size:12, weight:'bold'}, position:'start' }
+            }
+          }
+        }
+      },
+      scales:{
+        x:{ ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' } },
+        y:{ title:{ display:true, text:'Debt / GDP (%)', color:'#8b949e' }, ticks:{ color:'#8b949e' }, grid:{ color:'rgba(48,54,61,0.4)' } }
+      }
+    }
+  });
+})();
+
+// ============================
+// SECTION 7: COUNTER-EVIDENCE ACCORDION
+// ============================
+(function(){
+  const data = [
+    { domain:'Governance/Political', items:[
+      { scholar:'Baki Tezcan', year:2010, claim:'The period 1580-1826 was not decline but proto-democratization. Power shifted from devshirme courtiers to Muslim commoners. The deposition of Osman II (1622) represents constitutional awareness, not decay.', strength:'STRONG', effect:'Overturns the governance-decay thesis; what CAS codes as rigidification was political modernization through expanded participation.' },
+      { scholar:'Ariel Salzmann', year:2004, claim:'Provincial autonomy and the rise of ayans was not governance failure but an alternative path to modernity. Decentralization represented adaptive experimentation, not system breakdown.', strength:'STRONG', effect:'Nuances the CAS model fundamentally; decentralization reframed as rival modernization pathway rather than failure.' },
+      { scholar:'Multiple scholars', year:'various', claim:'Devshirme was fundamentally coercive: forced separation, mandatory conversion, absence of consent. It served sultanic control rather than genuine meritocracy. By the 17th century corruption permeated recruitment.', strength:'STRONG', effect:'Qualifies the positive framing of early Ottoman governance as "exceptional" meritocracy.' }
+    ]},
+    { domain:'Legal/Institutional', items:[
+      { scholar:'Timur Kuran', year:2011, claim:'Specific features of Islamic law (inheritance fragmentation, lack of corporate personhood, rigid waqf provisions) created a "long divergence" in organizational development starting c. 10th century.', strength:'STRONG', effect:'Complicates the CAS narrative; legal pluralism contained structural features that became liabilities for economic modernization.' },
+      { scholar:'Benjamin Braude', year:1982, claim:'Before the 19th century, the millet system was "not at all systematic." The notion of distinct millets was a later political innovation introduced in the rhetorical garb of ancient tradition.', strength:'STRONG', effect:'Overturns the premise; if the millet system was a retroactive construction, the entire legal/institutional domain needs reframing.' },
+      { scholar:'Bat Ye\'or / Ma\'oz', year:'various', claim:'The millet framework functioned as segregation rather than tolerance. Non-Muslims were classed as dhimmi, considered inferior, and denied equal political membership.', strength:'MODERATE', effect:'Qualifies the tolerance claim; "sophisticated legal pluralism" may mask systematic inequality.' }
+    ]},
+    { domain:'Military/Defense', items:[
+      { scholar:'Virginia H. Aksan', year:2007, claim:'Challenges teleological assumptions about Ottoman military failure. Ottoman-Russian warfare necessitated genuine military transformation, not simple decline. Adaptations in mobilization were institutional innovations.', strength:'STRONG', effect:'Overturns the linear decay model; post-classical changes were adaptive responses comparable to global military transformations.' },
+      { scholar:'Spyropoulos / Kafadar', year:'2025/various', claim:'Janissaries were socio-political and economic agents embedded in urban life, not merely a decayed military caste. Their commercial activities represented social integration.', strength:'STRONG', effect:'Reframes Janissary "corruption" as economic diversification and urban integration.' },
+      { scholar:'Various military historians', year:'various', claim:'Ottoman military innovation was more constant than the standard narrative allows. Adoption of firearms, fortress design, and naval technology continued through the 17th-18th centuries.', strength:'MODERATE', effect:'Weakens the claim of military technological stagnation; gap was relative, not absolute.' }
+    ]},
+    { domain:'Economic/Fiscal', items:[
+      { scholar:'Mehmet Genc', year:2000, claim:'Ottoman provisionism, fiscalism, and traditionalism were rational policy choices, not irrational anti-capitalism. The state prioritized cheap supply and social stability over growth.', strength:'STRONG', effect:'Reframes economic "failure" as deliberate policy choice with internal logic; CAS decline narrative assumes Western development as norm.' },
+      { scholar:'Salzmann / Darling', year:'1993/1996', claim:'Tax farming (iltizam/malikane) was a rational fiscal response to information asymmetry and monitoring costs, not mere corruption. It represented efficient contracting.', strength:'MODERATE', effect:'Nuances the fiscal decay narrative; decentralized revenue collection had efficiency rationale.' },
+      { scholar:'Dana Sajdi / Suraiya Faroqhi', year:'various', claim:'The "decline" framework is fundamentally Eurocentric. Economic divergence reflects different developmental pathways, not Ottoman failure. Comparison to Western Europe as benchmark is itself problematic.', strength:'STRONG', effect:'Challenges the entire evaluative framework; scores depend on which development model is treated as normative.' }
+    ]},
+    { domain:'Social/Class', items:[
+      { scholar:'Suraiya Faroqhi', year:2013, claim:'Ottoman social structures showed considerable mobility and adaptation. Artisans, merchants, and peasants exercised more agency than the rigidity thesis allows.', strength:'STRONG', effect:'Challenges the social rigidification narrative; class structures were more dynamic than CAS framework suggests.' },
+      { scholar:'Eunjeong Yi', year:'various', claim:'Ottoman guilds were dynamic, adaptive organizations that responded to market changes, not rigid medieval holdovers resistant to innovation.', strength:'MODERATE', effect:'Nuances the social institutional decay narrative; guilds showed adaptive capacity.' },
+      { scholar:'Amy Singer', year:2002, claim:'The waqf system constituted an extensive welfare infrastructure providing education, healthcare, and public services, representing sophisticated social provision.', strength:'MODERATE', effect:'Adds missing dimension to social domain; welfare infrastructure was more developed than framework acknowledges.' }
+    ]},
+    { domain:'Educational/Knowledge', items:[
+      { scholar:'Khaled El-Rouayheb', year:2015, claim:'Rational sciences (logic, philosophy, mathematics) continued to be taught and debated in Ottoman madrasas well into the 17th century. The "decline of learning" narrative is overstated.', strength:'MODERATE', effect:'Challenges the educational stagnation timeline; rational inquiry persisted longer than standard narrative allows.' },
+      { scholar:'Various scholars', year:'various', claim:'The delay in adopting the printing press was a rational response to calligraphic culture, employment concerns (scribes), and religious authority structures, not mere obscurantism.', strength:'MODERATE', effect:'Reframes printing delay as rational institutional choice rather than technological failure.' },
+      { scholar:'Madeline Zilfi', year:1988, claim:'Ulema played a more complex political role than simple "resistance to change." They were political actors navigating institutional transformation.', strength:'MODERATE', effect:'Nuances the portrayal of religious establishment as purely conservative force blocking educational reform.' }
+    ]},
+    { domain:'Cultural/Ideological', items:[
+      { scholar:'Selim Deringil', year:1998, claim:'Hamidian-era cultural production (1876-1909) was sophisticated legitimation strategy, not decline. The "Well-Protected Domains" represented creative ideological adaptation to modernity.', strength:'STRONG', effect:'Challenges the late-period cultural decline thesis; ideological production remained vital and adaptive.' },
+      { scholar:'Various historians', year:'various', claim:'The Tulip Period (1718-1730) represents cultural vitality and selective modernization, not decadence. Architectural, literary, and diplomatic innovations flourished.', strength:'STRONG', effect:'Directly contradicts decline-phase cultural scores; this period shows creative adaptation.' },
+      { scholar:'Cemal Kafadar', year:1995, claim:'Ottoman identity was more fluid and syncretic than rigid categories suggest. Cultural boundaries between Muslim and Christian, Turkish and non-Turkish were more permeable.', strength:'MODERATE', effect:'Complicates the cultural-rigidity narrative; identity formation was dynamic process.' }
+    ]},
+    { domain:'Technological/Innovation', items:[
+      { scholar:'Gabor Agoston', year:2005, claim:'The Ottoman-European military technology gap has been systematically overstated. Ottomans maintained competitive firearms production into the 17th century and the gap was relative, not absolute.', strength:'STRONG', effect:'Directly challenges the technology stagnation thesis; the gap was narrower and later than claimed.' },
+      { scholar:'Various scholars', year:'various', claim:'Ottoman selective technology adoption was a rational strategy, not blanket rejection. Technologies were evaluated for compatibility with existing institutional structures.', strength:'MODERATE', effect:'Reframes technology "failure" as strategic selectivity with institutional logic.' },
+      { scholar:'Military Revolution critics', year:'various', claim:'The entire "Military Revolution" thesis (Roberts/Parker) has been challenged as Eurocentric. Applying it as benchmark for Ottoman technological assessment embeds Western bias.', strength:'STRONG', effect:'Undermines the evaluative framework; if the Military Revolution thesis is overstated, Ottoman technology scores need recalibration.' }
+    ]},
+    { domain:'Information/Communication', items:[
+      { scholar:'Various scholars', year:'various', claim:'The ulak-menzilhane postal relay system was extensive and effective for its era, covering major routes across the empire with relay stations providing rapid communication.', strength:'MODERATE', effect:'Qualifies the information infrastructure weakness; the system was more capable than framework suggests.' },
+      { scholar:'Intelligence historians', year:'various', claim:'Ottoman counter-intelligence and diplomatic information-gathering were effective, particularly in the 16th-17th centuries. The Porte maintained sophisticated networks.', strength:'MODERATE', effect:'Adds missing dimension; information domain was not uniformly weak across all sub-categories.' },
+      { scholar:'Late Ottoman historians', year:'various', claim:'The rapid adoption of telegraph (1850s) and newspapers (1830s-1860s) shows capacity for information infrastructure modernization when political will existed.', strength:'WEAK', effect:'Provides minor qualification; late adoption shows adaptive capacity but does not overturn the long-term lag.' }
+    ]}
+  ];
+
+  const container = document.getElementById('accordionContainer');
+  data.forEach((d, i) => {
+    const hdr = document.createElement('div');
+    hdr.className = 'accordion-header';
+    hdr.innerHTML = `<span>${d.domain}</span><span class="arrow">&#9654;</span>`;
+    const body = document.createElement('div');
+    body.className = 'accordion-body';
+    d.items.forEach(it => {
+      const strengthClass = it.strength === 'STRONG' ? 'badge-strong' : it.strength === 'MODERATE' ? 'badge-moderate' : 'badge-weak';
+      body.innerHTML += `<div class="counter-card">
+        <div><span class="scholar">${it.scholar}</span> (${it.year}) <span class="badge ${strengthClass}">${it.strength}</span></div>
+        <p style="margin-top:8px;">${it.claim}</p>
+        <p class="effect"><strong>Effect on CAS narrative:</strong> ${it.effect}</p>
+      </div>`;
+    });
+    hdr.addEventListener('click', () => {
+      hdr.classList.toggle('open');
+      body.classList.toggle('open');
+    });
+    container.appendChild(hdr);
+    container.appendChild(body);
+  });
+})();
+
+// ============================
+// SECTION 8: RAW DATA TABLES
+// ============================
+(function(){
+  const tier1 = [
+    ["ECO-003","Rise","1299-1520","0.06-0.10","% annual GDP growth","LOW","Pamuk (2009) 'Estimating GDP per capita for the Ottoman Empire'"],
+    ["ECO-003","Peak","1520-1683","0.00-0.10","% annual GDP growth","LOW","Pamuk (2009) Utrecht paper"],
+    ["ECO-003","Decline (early)","1683-1820","0.00-0.05","% annual GDP growth","LOW","Pamuk (2009); Maddison Project Database"],
+    ["ECO-003","Decline (late)","1820-1913","0.56","% annual GDP growth","MODERATE","Pamuk (2006) JEH 66(3):809-828"],
+    ["ECO-004","Rise","1528","9,650,000","Venetian ducats (central revenue)","HIGH","Barkan IFM 14 (1953-54); Karaman & Pamuk (2010)"],
+    ["ECO-004","Peak","1520-1683","3-5","% of GDP (central treasury)","MODERATE","Karaman & Pamuk (2010) JEH 70(3):593-629"],
+    ["ECO-004","Decline (early)","1683-1820","2-4","% of GDP (central treasury)","MODERATE","Karaman & Pamuk (2010) JEH"],
+    ["ECO-004","Decline (late)","1840-1914","5-10","% of GDP (central treasury)","MODERATE","Karaman & Pamuk (2010) JEH; Tanzimat reform data"],
+    ["ECO-005","Rise","1299-1520","~0","% of GDP (no external borrowing)","HIGH","Pamuk (2000) A Monetary History CUP"],
+    ["ECO-005","Peak","1520-1683","~0","% of GDP (no external debt)","HIGH","Pamuk (2000) CUP; Salzmann (1993)"],
+    ["ECO-005","Decline","1854","~10-15","% of GDP","LOW","Ottoman public debt records; first loan \u00a33M"],
+    ["ECO-005","Decline","1875","~100-150","% of GDP","LOW","Ottoman debt records; Birdal (2010); Reinhart & Rogoff"],
+    ["ECO-005","Decline","1881","~50-75","% of GDP (post-restructuring)","LOW","Decree of Muharrem 1881; OPDA records"],
+    ["ECO-006","Rise","1299-1520","N/A","No government borrowing","HIGH","Pamuk (2000) A Monetary History CUP"],
+    ["ECO-006","Peak","1520-1683","N/A","No formal government bonds","HIGH","Pamuk (2000) CUP"],
+    ["ECO-006","Decline","1775-1840","~10-12","% annual (esham bonds)","LOW","Salzmann (1993); esham-i cedid 1871"],
+    ["ECO-006","Decline","1854","6 / 7.5 effective","% annual (first foreign loan)","HIGH","Ottoman loan records 1854"],
+    ["ECO-006","Decline","1858-1873","6-9 / 10-15 effective","% annual","MODERATE","Ottoman loan records; 15 loans 1854-1874"],
+    ["ECO-006","Decline","1874","~25 (refused)","% annual (credit collapse)","HIGH","Galata bankers refused to lend at 25%"],
+    ["ECO-006","Decline","1882-1914","4-6","% annual (post-OPDA)","MODERATE","OPDA records; Birdal (2010)"],
+    ["ECO-007","Rise","1299-1520","10-20","% annual (commercial)","LOW","Kuran (2011) The Long Divergence"],
+    ["ECO-007","Peak","1520-1683","10-15","% annual (cash waqfs)","MODERATE","Kuran & Rubin (2018) Economic Journal"],
+    ["ECO-007","Decline","1683-1854","12-24","% annual (widening range)","MODERATE","Kuran & Rubin (2018); Damascus records"],
+    ["ECO-007","Decline","1856-1914","8-15","% annual","MODERATE","Ottoman Bank records; Galata banker rates"],
+    ["ECO-008","Rise","1299-1520","Surplus","Qualitative","LOW","Inalcik (1994); Pamuk (1987)"],
+    ["ECO-008","Peak","1520-1683","Near balance","Qualitative","LOW","Inalcik (1994); Pamuk (1987)"],
+    ["ECO-008","Decline","1838-1913","Deficit (growing)","Semi-quantitative","MODERATE","Pamuk (1987); Quataert in Inalcik & Quataert (1994)"],
+    ["ECO-009","Rise","1326-1444","~0","% debasement/decade","HIGH","Pamuk (2000) A Monetary History CUP"],
+    ["ECO-009","Rise","1444-1481","~8","% debasement/decade","HIGH","Pamuk (2000) CUP"],
+    ["ECO-009","Rise","1481-1520","~1-2","% debasement/decade","HIGH","Pamuk (2000) CUP"],
+    ["ECO-009","Peak","1520-1585","~1.5","% debasement/decade","MODERATE","Pamuk (2000) CUP; Pamuk (2004)"],
+    ["ECO-009","Peak","1585-1600","~30","% debasement/decade","HIGH","Pamuk (2000) CUP; 'Great Debasement 1585-86'"],
+    ["ECO-009","Decline","1600-1700","~8","% debasement/decade","HIGH","Pamuk (2000) CUP"],
+    ["ECO-009","Decline","1700-1800","~9","% debasement/decade","HIGH","Pamuk (2000) CUP"],
+    ["ECO-009","Decline","1800-1844","~25","% debasement/decade","HIGH","Pamuk (2000) CUP; Mahmud II debasement"],
+    ["ECO-010","Rise","1299-1520","1.0","Scale 1-5","MODERATE","Kuran (2011); Pamuk (2000) CUP"],
+    ["ECO-010","Peak","1520-1683","1.5","Scale 1-5","MODERATE","Kuran & Rubin (2018); Korkut & Bulut"],
+    ["ECO-010","Decline (early)","1683-1840","1.5","Scale 1-5","MODERATE","Kuran (2011); Salzmann (1993)"],
+    ["ECO-010","Decline (late)","1863-1914","3.0","Scale 1-5","MODERATE","Ottoman Bank records; OPDA records"],
+    ["ECO-011","Rise","1299-1520","0.5","Scale 1-5","HIGH","Kuran (2011) The Long Divergence"],
+    ["ECO-011","Peak","1520-1683","1.0","Scale 1-5","MODERATE","Kuran (2011); Salzmann (1993)"],
+    ["ECO-011","Decline","1775-1860","1.5","Scale 1-5","MODERATE","Salzmann (1993); EHES WP 112"],
+    ["ECO-011","Decline","1866-1914","2.5","Scale 1-5","MODERATE","Borsa Istanbul historical records"],
+    ["GOV-007","Rise","1299-1520","~80-90","% assessed tax collected","MODERATE","Inalcik (1994); Pamuk (2004)"],
+    ["GOV-007","Peak","1527-1528","46","% reaching central treasury","HIGH","Karaman & Pamuk (2010) JEH; Barkan IFM"],
+    ["GOV-007","Decline","1661-1662","25","% reaching central treasury","HIGH","Karaman & Pamuk (2010) JEH"],
+    ["GOV-007","Decline (late)","1840-1870","~35-40","% (Tanzimat recovery)","MODERATE","Pamuk (2014) Fiscal Centralisation"],
+    ["GOV-008","Rise","1299-1520","1.5","Scale 1-5 (1=low)","MODERATE","Inalcik (1973); Turchin & Nefedov (2009)"],
+    ["GOV-008","Peak","1520-1683","2.5","Scale 1-5","MODERATE","Inalcik (1980); Goldstone (1991)"],
+    ["GOV-008","Decline","1683-1922","4.0","Scale 1-5","HIGH","Salzmann (1993); Barkey (2008)"],
+    ["MIL-003","Rise","1299-1520","~50-60","% of total state revenue","MODERATE","Inalcik (1994); Agoston (2005)"],
+    ["MIL-003","Peak","1527-1528","~52-61","% of total central budget","MODERATE","Barkan IFM 14 (1953-54); Murphey (1999)"],
+    ["MIL-003","Peak/Decline","1630","77","% of total central budget","HIGH","Agoston; Barkan budgets"],
+    ["MIL-003","Decline","1670","62.5","% of total central budget","HIGH","Agoston (1995); Barkan 1669-70"],
+    ["MIL-003","Decline","1784-1785","~75","% of total state expenditure","HIGH","METU thesis; 1784-85 budget"],
+    ["ECO-001","Rise","~1500","7,200-9,000","1990 Int$ millions","LOW","Maddison Project; Pamuk (2009)"],
+    ["ECO-001","Peak","~1600","12,780","1990 Int$ millions","MODERATE","Maddison Project; Pamuk (2009)"],
+    ["ECO-001","Decline","~1700","12,240","1990 Int$ millions","MODERATE","Maddison Project; Pamuk (2009)"],
+    ["ECO-001","Decline","~1820","15,910","1990 Int$ millions","MODERATE","Maddison Project; Pamuk (2006) JEH"],
+    ["ECO-001","Decline","1913","25,300","1990 Int$ millions","MODERATE","Pamuk (2006); Maddison Project"],
+    ["ECO-002","Rise","~1500","600","1990 Int$ per person","MODERATE","Maddison Project 2020; Pamuk (2009)"],
+    ["ECO-002","Peak","~1600","600-700","1990 Int$ per person","MODERATE","Maddison; Bolt & van Zanden"],
+    ["ECO-002","Peak/Decline","~1700","600-740","1990 Int$ per person","MODERATE","Maddison; van Zanden & Pamuk"],
+    ["ECO-002","Decline","~1820","740","1990 Int$ per person","MODERATE","Pamuk (2006) JEH; Maddison"],
+    ["ECO-002","Decline","1913","979-1,100","1990 Int$ per person","MODERATE","Pamuk (2006); Maddison Project"]
+  ];
+
+  const layerB = [
+    ["GOV-007","Rise","1299-1520","~80-90%","% assessed tax collected","MODERATE","Inalcik (1994); Pamuk (2004)"],
+    ["GOV-007","Peak","1520-1683","46%","% reaching central treasury","HIGH","Karaman & Pamuk (2010) JEH; Barkan IFM"],
+    ["GOV-007","Decline","1683-1922","25%","% reaching central treasury","HIGH","Karaman & Pamuk (2010) JEH"],
+    ["GOV-007","Decline (late)","1840-1870","~35-40%","% (Tanzimat recovery)","MODERATE","Pamuk (2014) Fiscal Centralisation"],
+    ["GOV-008","Rise","1299-1520","1.5","Scale 1-5","MODERATE","Inalcik (1973); Turchin & Nefedov (2009)"],
+    ["GOV-008","Peak","1520-1683","2.5","Scale 1-5","MODERATE","Inalcik (1980); Goldstone (1991)"],
+    ["GOV-008","Decline","1683-1922","4.0","Scale 1-5","HIGH","Salzmann (1993); Barkey (2008)"],
+    ["GOV-003","Rise","1299-1520","4","Administrative levels","HIGH","Inalcik (1973)"],
+    ["GOV-003","Peak","1520-1683","4-5","Administrative levels","HIGH","Inalcik (1994)"],
+    ["GOV-003","Decline","1864-1922","5-6","Administrative levels","HIGH","Vilayet Law of 1864; Inalcik & Quataert (1994)"],
+    ["MIL-003","Rise","1299-1520","~50-60%","% of total state revenue","MODERATE","Inalcik (1994); Agoston (2005)"],
+    ["MIL-003","Peak (1527)","1527-1528","~52-61%","% of total central budget","MODERATE","Barkan IFM 14; Murphey (1999)"],
+    ["MIL-003","Peak (1630)","1630","77%","% of total central budget","HIGH","Agoston; Barkan budgets"],
+    ["MIL-003","Decline (1670)","1670","62.5%","% of total central budget","HIGH","Agoston (1995); Barkan 1669-70"],
+    ["MIL-003","Decline (1785)","1784-1785","~75%","% of total state expenditure","HIGH","METU thesis; 1784-85 budget"],
+    ["ECO-001","Rise","~1500","7,200-9,000","1990 Int$ millions","LOW","Maddison Project; Pamuk (2009)"],
+    ["ECO-001","Peak","~1600","12,780","1990 Int$ millions","MODERATE","Maddison Project; Pamuk (2009)"],
+    ["ECO-001","Decline","~1700","12,240","1990 Int$ millions","MODERATE","Maddison Project; Pamuk (2009)"],
+    ["ECO-001","Decline","~1820","15,910","1990 Int$ millions","MODERATE","Maddison Project; Pamuk (2006)"],
+    ["ECO-001","Decline","1913","25,300","1990 Int$ millions","MODERATE","Pamuk (2006); Maddison Project"],
+    ["ECO-002","Rise","~1500","600","1990 Int$ per person","MODERATE","Maddison Project 2020; Pamuk (2009)"],
+    ["ECO-002","Peak","~1600","600-700","1990 Int$ per person","MODERATE","Maddison; Bolt & van Zanden"],
+    ["ECO-002","Peak/Decline","~1700","600-740","1990 Int$ per person","MODERATE","Maddison; van Zanden & Pamuk"],
+    ["ECO-002","Decline","~1820","740","1990 Int$ per person","MODERATE","Pamuk (2006); Maddison"],
+    ["ECO-002","Decline","1913","979-1,100","1990 Int$ per person","MODERATE","Pamuk (2006); Maddison Project"],
+    ["ECO-009","Peak","1585-1600","~30%","% debasement/decade","HIGH","Pamuk (2000) CUP; Great Debasement"],
+    ["ECO-009","Decline","1800-1844","~25%","% debasement/decade","HIGH","Pamuk (2000) CUP; Mahmud II"]
+  ];
+
+  function renderTable(data, tbodyId, searchId) {
+    const tbody = document.getElementById(tbodyId);
+    const search = document.getElementById(searchId);
+
+    function render(filter) {
+      const f = (filter || '').toLowerCase();
+      tbody.innerHTML = '';
+      data.forEach(row => {
+        if (f && !row.join(' ').toLowerCase().includes(f)) return;
+        const tr = document.createElement('tr');
+        row.forEach((cell, ci) => {
+          const td = document.createElement('td');
+          if (ci === 5) {
+            td.className = 'conf-' + cell;
+          }
+          td.textContent = cell;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    }
+    render('');
+    search.addEventListener('input', () => render(search.value));
+  }
+
+  renderTable(tier1, 'tbodyTier1', 'searchTier1');
+  renderTable(layerB, 'tbodyLayerB', 'searchLayerB');
+})();
+
+// ============================
+// SECTION 9: BIBLIOGRAPHY
+// ============================
+(function(){
+  const bib = {
+    'Economic History & Fiscal Policy': [
+      'Pamuk, Sevket. <em>A Monetary History of the Ottoman Empire</em>. Cambridge University Press, 2000.',
+      'Pamuk, Sevket. "Estimating Economic Growth in the Middle East since 1820." <em>Journal of Economic History</em> 66, no. 3 (2006): 809-828.',
+      'Pamuk, Sevket. "Estimating GDP per capita for the Ottoman Empire in a European Comparative Framework, 1500-1820." XVth World Economic History Congress, Utrecht, 2009.',
+      'Pamuk, Sevket. "Prices in the Ottoman Empire, 1469-1914." <em>International Journal of Middle East Studies</em> 36, no. 3 (2004): 451-468.',
+      'Karaman, K. Kivanc, and Sevket Pamuk. "Ottoman State Finances in European Perspective, 1500-1914." <em>Journal of Economic History</em> 70, no. 3 (2010): 593-629.',
+      'Birdal, Murat. <em>The Political Economy of Ottoman Public Debt: Insolvency and European Financial Control in the Late Nineteenth Century</em>. I.B. Tauris, 2010.',
+      'Kuran, Timur. <em>The Long Divergence: How Islamic Law Held Back the Middle East</em>. Princeton University Press, 2011.',
+      'Kuran, Timur, and Jared Rubin. "The Financial Power of the Powerless: Socio-Economic Status and Interest Rates under Partial Rule of Law." <em>Economic Journal</em> 128 (2018): 758-796.',
+      'Salzmann, Ariel. "An Ancien Regime Revisited: Privatization and Political Economy in the Eighteenth-Century Ottoman Empire." <em>Politics & Society</em> 21, no. 4 (1993): 393-423.',
+      'Genc, Mehmet. <em>Osmanli Imparatorlugunda Devlet ve Ekonomi</em>. Istanbul, 2000.',
+      'Barkan, Omer Lutfi. "H.933-934 Mali Yilina Ait Bir Butce Ornegi." <em>Istanbul Universitesi Iktisat Fakultesi Mecmuasi</em> 14 (1953-54): 251-329.',
+      'Homer, Sidney, and Richard Sylla. <em>A History of Interest Rates</em>, 4th ed. Wiley, 2005.',
+      'Reinhart, Carmen M., and Kenneth S. Rogoff. <em>This Time Is Different: Eight Centuries of Financial Folly</em>. Princeton University Press, 2009.',
+      'Maddison Project Database 2020. Bolt, Jutta, and Jan Luiten van Zanden.'
+    ],
+    'Governance & Institutions': [
+      'Inalcik, Halil. <em>The Ottoman Empire: The Classical Age, 1300-1600</em>. Weidenfeld & Nicolson, 1973.',
+      'Inalcik, Halil, and Donald Quataert, eds. <em>An Economic and Social History of the Ottoman Empire, 1300-1914</em>. Cambridge University Press, 1994.',
+      'Tezcan, Baki. <em>The Second Ottoman Empire: Political and Social Transformation in the Early Modern World</em>. Cambridge University Press, 2010.',
+      'Salzmann, Ariel. <em>Tocqueville in the Ottoman Empire: Rival Paths to the Modern State</em>. Brill, 2004.',
+      'Barkey, Karen. <em>Bandits and Bureaucrats: The Ottoman Route to State Centralization</em>. Cornell University Press, 1994.',
+      'Barkey, Karen. <em>Empire of Difference: The Ottomans in Comparative Perspective</em>. Cambridge University Press, 2008.',
+      'Darling, Linda T. <em>Revenue-Raising and Legitimacy: Tax Collection and Finance Administration in the Ottoman Empire, 1560-1660</em>. Brill, 1996.',
+      'Quataert, Donald. <em>The Ottoman Empire, 1700-1922</em>. 2nd ed. Cambridge University Press, 2005.',
+      'Turchin, Peter, and Sergey Nefedov. <em>Secular Cycles</em>. Princeton University Press, 2009.',
+      'Goldstone, Jack A. <em>Revolution and Rebellion in the Early Modern World</em>. University of California Press, 1991.'
+    ],
+    'Military History': [
+      'Agoston, Gabor. <em>Guns for the Sultan: Military Power and the Weapons Industry in the Ottoman Empire</em>. Cambridge University Press, 2005.',
+      'Aksan, Virginia H. <em>Ottoman Wars 1700-1870: An Empire Besieged</em>. Pearson Longman, 2007.',
+      'Murphey, Rhoads. <em>Ottoman Warfare, 1500-1700</em>. UCL Press/Routledge, 1999.',
+      'Spyropoulos, Yannis, ed. <em>The Janissaries: Socio-Political and Economic Actors in the Ottoman Empire</em>. Crete University Press, 2025.',
+      'Kafadar, Cemal. "Janissaries and Other Riffraff of Ottoman Istanbul." Various publications.'
+    ],
+    'Social & Cultural History': [
+      'Faroqhi, Suraiya. <em>Artisans of Empire: Crafts and Craftspeople Under the Ottomans</em>. I.B. Tauris, 2009.',
+      'Faroqhi, Suraiya. <em>Travel and Artisans in the Ottoman Empire: Employment and Mobility in the Early Modern Era</em>. I.B. Tauris, 2013.',
+      'Singer, Amy. <em>Constructing Ottoman Beneficence: An Imperial Soup Kitchen in Jerusalem</em>. SUNY Press, 2002.',
+      'Kafadar, Cemal. <em>Between Two Worlds: The Construction of the Ottoman State</em>. University of California Press, 1995.',
+      'Deringil, Selim. <em>The Well-Protected Domains: Ideology and the Legitimation of Power in the Ottoman Empire, 1876-1909</em>. I.B. Tauris, 1998.',
+      'Yi, Eunjeong. <em>Guild Dynamics in Seventeenth-Century Istanbul: Fluidity and Leverage</em>. Brill, 2004.',
+      'White, Sam. <em>The Climate of Rebellion in the Early Modern Ottoman Empire</em>. Cambridge University Press, 2011.'
+    ],
+    'Legal & Religious Institutions': [
+      'Braude, Benjamin. "Foundation Myths of the Millet System." In <em>Christians and Jews in the Ottoman Empire</em>, edited by Benjamin Braude and Bernard Lewis, 1:69-88. Holmes & Meier, 1982.',
+      'Zilfi, Madeline C. <em>The Politics of Piety: The Ottoman Ulema in the Postclassical Age, 1600-1800</em>. Bibliotheca Islamica, 1988.',
+      'El-Rouayheb, Khaled. <em>Islamic Intellectual History in the Seventeenth Century: Scholarly Currents in the Ottoman Empire and the Maghreb</em>. Cambridge University Press, 2015.',
+      'Korkut, Hasan, and Mehmet Bulut. "Ottoman Cash Waqfs: An Alternative Financial System." <em>Insight Turkey</em>, various.'
+    ],
+    'Trade & European Relations': [
+      'Pamuk, Sevket. <em>The Ottoman Empire and European Capitalism, 1820-1913: Trade, Investment and Production</em>. Cambridge University Press, 1987.',
+      'Williamson, Jeffrey G. "Ottoman De-Industrialization." NBER Working Paper, 2009.',
+      'Sajdi, Dana. <em>Ottoman Tulips, Ottoman Coffee: Leisure and Lifestyle in the Eighteenth Century</em>. I.B. Tauris, 2007.',
+      'Bulut, Mehmet, and Altay, H. "The Ottoman Economy 1870-1913: Preliminary Second-Generation Estimates." <em>TUJISE</em>, 2021.'
+    ]
+  };
+
+  const el = document.getElementById('bibContent');
+  Object.keys(bib).forEach(cat => {
+    el.innerHTML += `<div class="bib-cat">${cat}</div>`;
+    bib[cat].forEach(entry => {
+      el.innerHTML += `<div class="bib-entry">${entry}</div>`;
+    });
+  });
+})();
+
+// ============================
+// NAV ACTIVE STATE
+// ============================
+(function(){
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+})();
+</script>
+</body>
+</html>

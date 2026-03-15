@@ -9,4 +9,3 @@ venv/
 *.log
 .ruff_cache/
 .pytest_cache/
-dashboard.html
