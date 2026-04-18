@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import secrets
 from datetime import datetime
 from enum import Enum
 from typing import Any
@@ -22,6 +23,13 @@ class ResearchPhase(str, Enum):
     CRITIQUE = "critique"
     REFINEMENT = "refinement"
     SYNTHESIS = "synthesis"
+
+
+class SessionStatus(str, Enum):
+    IN_PROGRESS = "in_progress"
+    PAUSED = "paused"
+    COMPLETED = "completed"
+    FAILED = "failed"
 
 
 class Confidence(str, Enum):
@@ -69,11 +77,46 @@ class ResearchOutput(BaseModel):
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
+class SessionEvent(BaseModel):
+    """Single observability event appended to the session JSONL log."""
+
+    timestamp: datetime = Field(default_factory=datetime.now)
+    session_id: str
+    event_type: str  # session_started, phase_started, phase_completed, checkpoint,
+                     # refinement_triggered, session_paused, session_resumed,
+                     # session_completed, session_failed, note
+    phase: ResearchPhase | None = None
+    role: AgentRole | None = None
+    message: str = ""
+    data: dict[str, Any] = Field(default_factory=dict)
+
+
+def _generate_session_id() -> str:
+    """Stable, sortable session id — sess_<YYYYMMDD_HHMMSS>_<rand6>."""
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    suffix = secrets.token_hex(3)
+    return f"sess_{stamp}_{suffix}"
+
+
 class ResearchSession(BaseModel):
+    # Identity
+    session_id: str = Field(default_factory=_generate_session_id)
     question: str
     domain: str = "infonomics"
     depth: str = "phd"
+
+    # Timing
     started_at: datetime = Field(default_factory=datetime.now)
+    last_checkpoint_at: datetime | None = None
+    completed_at: datetime | None = None
+
+    # Progress
     outputs: list[ResearchOutput] = Field(default_factory=list)
     refinement_rounds: int = 0
-    status: str = "in_progress"  # in_progress, completed
+    current_phase: ResearchPhase | None = None
+    next_phase: ResearchPhase | None = ResearchPhase.LITERATURE_REVIEW
+
+    # State
+    status: SessionStatus = SessionStatus.IN_PROGRESS
+    last_error: str | None = None
+    metadata: dict[str, Any] = Field(default_factory=dict)

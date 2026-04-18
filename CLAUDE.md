@@ -51,37 +51,86 @@ Question → Literature Review → Theory → Critique ─┐
                                             Synthesis ◄── (when critique passes)
 ```
 
-## Output Persistence
+## Output Persistence & Checkpoint Discipline
 
-After each research session, save outputs to `data/outputs/` using the session
-management scripts. Each session produces:
-- `session_YYYYMMDD_HHMMSS.json` — structured findings, citations, critiques
-- Accumulated knowledge is available in `data/outputs/` for cross-session reference
+Sessions are **checkpointable and resumable** so a crash, context exhaustion,
+or harness restart never costs more than one phase of work. You MUST follow
+the lifecycle below — do not write JSON files by hand.
+
+### Lifecycle calls
+
+```python
+from src import session as S
+from src.models import ResearchPhase, AgentRole
+
+# 1. Start a fresh session — or resume one
+sess = S.new_session("Research question text...")
+# sess, next_phase = S.resume_session("sess_YYYYMMDD_HHMMSS_xxxxxx")
+
+# 2. Before each role, mark the phase started
+S.start_phase(sess, ResearchPhase.LITERATURE_REVIEW, AgentRole.LITERATURE_REVIEWER)
+
+# 3. After producing the role's output, record it and declare the next phase
+S.record_output(sess, output, next_phase=ResearchPhase.THEORETICAL_ANALYSIS)
+
+# 4. If the Critic flags major issues
+S.mark_refinement(sess, reason="critic flagged 3 majors")
+
+# 5. When the Synthesizer is done
+S.finalize(sess)
+```
+
+Each call writes the snapshot atomically to
+`data/outputs/sessions/<session_id>.json` and appends an event line to
+`<session_id>.events.jsonl`. The snapshot is the single source of truth on
+resume; the event log is observability.
+
+### On every session start
+
+Check for resumable work first. If `find_resumable()` returns sessions, ask
+the user whether to resume one before starting fresh. The `SessionStart`
+hook in `.claude/settings.json` prints them automatically.
+
+### Observability commands
+
+```bash
+research-viewer                       # all sessions, status, current phase
+research-viewer resumable             # only in_progress / paused
+research-viewer show <session_id>     # full detail
+research-viewer tail <session_id>     # event timeline
+```
 
 ## File Structure
 
 ```
 src/
-├── models.py        # Pydantic models for structured research data
-├── session.py       # Session management — save/load research outputs
-├── viewer.py        # CLI viewer for past research sessions
+├── models.py        # Pydantic models — sessions, outputs, events
+├── session.py       # new_session / start_phase / record_output / resume_session
+├── viewer.py        # CLI: list / show / tail / resumable
+├── hooks.py         # SessionStart + Stop hook entry points
 ├── templates/       # Role prompt templates (reference material)
-│   ├── literature_reviewer.md
-│   ├── theorist.md
-│   ├── critic.md
-│   └── synthesizer.md
 data/
-├── outputs/         # Research session outputs (JSON)
+├── outputs/
+│   └── sessions/    # <session_id>.json snapshots + .events.jsonl logs
 ├── knowledge_base/  # Accumulated cross-session knowledge
+.claude/
+└── settings.json    # Wires SessionStart / Stop / SubagentStop hooks
 ```
 
 ## How to Start a Research Session
 
 User says something like: "Research [topic]"
 You respond by:
-1. Acknowledging the research question
-2. Proceeding through the pipeline above, clearly labeling each role switch
-3. Saving the session output when complete
+1. Calling `S.find_resumable()` — if anything is open, ask before starting fresh.
+2. Acknowledging the research question.
+3. Calling `S.new_session(...)`.
+4. Proceeding through the pipeline above, clearly labeling each role switch
+   AND calling `S.start_phase` / `S.record_output` at every transition.
+5. Calling `S.finalize(sess)` when the Synthesizer is done.
+
+The `Stop` hook in `.claude/settings.json` will flip any abandoned
+`in_progress` session to `paused` automatically — but it's a backstop, not a
+substitute for calling `record_output` / `finalize` yourself.
 
 ## Domain Focus
 
