@@ -1,0 +1,291 @@
+{
+  "session_id": "sess_20260509_014534_1ac42d",
+  "question": "Under what conditions does a data marketplace achieve efficient allocation when data quality is unobservable ex-ante?",
+  "domain": "infonomics",
+  "depth": "phd",
+  "started_at": "2026-05-09T01:45:34.959252",
+  "last_checkpoint_at": "2026-05-09T01:45:35.024474",
+  "completed_at": "2026-05-09T01:45:35.024228",
+  "outputs": [
+    {
+      "agent_role": "literature_reviewer",
+      "phase": "literature_review",
+      "timestamp": "2026-05-09T01:45:34.964515",
+      "summary": "Two literatures converge on the question: (a) classical information economics (Akerlof, Spence, Stiglitz) on asymmetric-quality markets; (b) recent work on data marketplaces (Bergemann-Bonatti on selling information, Jones-Tonetti on nonrivalry, Acemoglu et al. on externalities, Laney on practitioner valuation).",
+      "detailed_content": "Established results carried forward:\n  - Akerlof: with sufficient quality dispersion and no signaling,\n    markets unravel to lowest-quality pooling or shutdown.\n  - Spence/Rothschild-Stiglitz: costly signals + screening menus can\n    restore separation when single-crossing holds.\n  - Bergemann-Bonatti: information goods are sold optimally via menus\n    of (price, precision) when buyer types differ in willingness to\n    pay for accuracy.\n  - Jones-Tonetti: nonrivalry of data implies first-best is universal\n    access; property-rights regime determines how far we fall short.\n  - Acemoglu et al.: privacy externalities drive over-sharing relative\n    to social optimum; market mechanism alone does not internalize.\n  - Practitioner side (Laney, Ghorbani-Zou): three valuation families\n    (cost-, market-, income-based) plus Shapley attribution; none\n    address the ex-ante asymmetry directly.\n\nOpen debates:\n  1. Is data an experience good (quality revealed by use) or a search\n     good (quality inspectable pre-purchase)? Schemas and previews\n     move it toward search; fitness-for-purpose keeps it experience.\n  2. Are existing data marketplaces (Snowflake, Dawex, AWS Data\n     Exchange) survival evidence of mechanism efficacy, or\n     survivorship bias toward easy categories (geo, weather)?\n  3. Should reputation, certification, or outcome-contingent pricing\n     be the primary mechanism? No consensus.\n\nGaps:\n  - No unified treatment specifying which mechanism dominates as a\n    function of which dimension of quality is dispersed.\n  - Externalities (privacy on data subjects, replicability erosion of\n    seller rents) usually treated separately from quality asymmetry.",
+      "findings": [],
+      "critiques": [],
+      "citations": [
+        {
+          "title": "The Market for Lemons",
+          "authors": [
+            "George A. Akerlof"
+          ],
+          "year": 1970,
+          "source": "QJE 84(3)",
+          "doi": null,
+          "summary": "Adverse selection unravels markets when sellers know quality and buyers do not."
+        },
+        {
+          "title": "Job Market Signaling",
+          "authors": [
+            "Michael Spence"
+          ],
+          "year": 1973,
+          "source": "QJE 87(3)",
+          "doi": null,
+          "summary": "Costly signals separate types in equilibrium."
+        },
+        {
+          "title": "Equilibrium in Competitive Insurance Markets",
+          "authors": [
+            "Michael Rothschild",
+            "Joseph Stiglitz"
+          ],
+          "year": 1976,
+          "source": "QJE 90(4)",
+          "doi": null,
+          "summary": "Screening menus separate types; pooling unstable."
+        },
+        {
+          "title": "Selling Information",
+          "authors": [
+            "Dirk Bergemann",
+            "Alessandro Bonatti"
+          ],
+          "year": 2019,
+          "source": "JEL 57(1)",
+          "doi": null,
+          "summary": "Survey of mechanism design for information goods; buyer heterogeneity drives menu design."
+        },
+        {
+          "title": "Nonrivalry and the Economics of Data",
+          "authors": [
+            "Charles I. Jones",
+            "Christopher Tonetti"
+          ],
+          "year": 2020,
+          "source": "AER 110(9)",
+          "doi": null,
+          "summary": "Data is nonrival; property-rights allocation drives long-run welfare."
+        },
+        {
+          "title": "Data Shapley",
+          "authors": [
+            "Amirata Ghorbani",
+            "James Zou"
+          ],
+          "year": 2019,
+          "source": "ICML",
+          "doi": null,
+          "summary": "Shapley value attribution of training-data value to model performance."
+        },
+        {
+          "title": "Too Much Data",
+          "authors": [
+            "Daron Acemoglu",
+            "Ali Makhdoumi",
+            "Azarakhsh Malekian",
+            "Asu Ozdaglar"
+          ],
+          "year": 2022,
+          "source": "AER 112(9)",
+          "doi": null,
+          "summary": "Data externalities can produce excessive information sharing relative to social optimum."
+        },
+        {
+          "title": "Infonomics",
+          "authors": [
+            "Douglas Laney"
+          ],
+          "year": 2017,
+          "source": "Routledge",
+          "doi": null,
+          "summary": "Practitioner framework for data valuation."
+        }
+      ],
+      "metadata": {}
+    },
+    {
+      "agent_role": "theorist",
+      "phase": "theoretical_analysis",
+      "timestamp": "2026-05-09T01:45:34.970050",
+      "summary": "Five propositions (P1 unraveling, P2 reputation, P3 samples, P4 outcome-contingent, P5 certification). Together they map the conditions under which a data marketplace can or cannot reach efficient allocation under ex-ante quality asymmetry.",
+      "detailed_content": "Setup: sellers indexed by quality q in [0,1] with cost c(q) increasing\nand convex; buyers indexed by type theta with valuation v(q, theta)\nincreasing in q; pre-purchase quality unobservable; post-purchase\nquality partially revealed via use.\n\nP1 (Unraveling). For dispersion sigma_q above a threshold and zero\nex-ante signal, the unique competitive equilibrium is shutdown or\nlowest-quality pooling. (Akerlof 1970 directly.)\n\nP2 (Reputation). Repeated interaction sustains separating equilibrium\nif delta > delta*(L), where L is revelation lag and delta* is\nincreasing in L. Failure mode: thin markets (few repeat buyers)\ncollapse delta* above feasibility.\n\nP3 (Samples / screening). Free or low-cost samples implement a\nSpence-Rothschild-Stiglitz separation iff (a) the sample is\ninformative on fit-for-purpose, (b) sample is not a perfect substitute\nfor the full asset (else free-riding), (c) single-crossing holds in\nsample-cost-vs-quality space.\n\nP4 (Outcome-contingent). Royalty / pay-for-uplift contracts implement\nfirst-best when attribution is exact; introducing attribution noise\nsigma_a > 0 reintroduces moral hazard at rate proportional to sigma_a.\n\nP5 (Certification). A third-party certifier with rotation and\nliability stake achieves allocation; a fee-paid certifier without\nliability replicates the original asymmetry one level up\n(CRA-pre-2008 case).\n\nOpen questions for the critic: aggregation of multidimensional\nquality, externalities (replicability, privacy), survivorship bias in\nempirical examples.",
+      "findings": [
+        {
+          "claim": "Pure spot markets with unobservable quality and no reputation collapse to lowest-quality pooling or shutdown when quality dispersion exceeds a threshold.",
+          "evidence": "Direct application of Akerlof (1970) to data: sellers with c(q) > p exit, conditional mean quality drops, buyer WTP falls, iterates to shutdown.",
+          "confidence": "high",
+          "methodology": "Comparative-statics on Akerlof model.",
+          "limitations": "Assumes single-dimensional q and no partial ex-ante signal.",
+          "citations": []
+        },
+        {
+          "claim": "Repeat-purchase reputation sustains efficient allocation iff the seller's discount factor exceeds a threshold and quality-revelation lag is bounded.",
+          "evidence": "Folk-theorem argument: defection payoff < (delta / (1-delta)) * cooperation rent; binds when lag inflates defection horizon.",
+          "confidence": "high",
+          "methodology": "Repeated-game reasoning, Klein-Leffler style.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Free samples (previews) restore allocation iff the sample is informative about fit-for-purpose AND not a perfect substitute for the full asset.",
+          "evidence": "Sample as cheap signal; substitution risk is the free-rider problem familiar from information goods.",
+          "confidence": "medium",
+          "methodology": "Signaling + substitution analysis.",
+          "limitations": "Treats sample informativeness as scalar.",
+          "citations": []
+        },
+        {
+          "claim": "Outcome-contingent pricing (royalties on uplift) Pareto-dominates fixed pricing under unobservable quality but is fragile to attribution noise.",
+          "evidence": "Aligns seller payoff with realised value; attribution noise reintroduces moral hazard.",
+          "confidence": "medium",
+          "methodology": "Principal-agent with noisy signal.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Third-party certification restores allocation iff the certifier's incentives are aligned via rotation, liability, or stake in outcome.",
+          "evidence": "Credit-rating agency literature: misaligned certifiers replicate the asymmetry one level up.",
+          "confidence": "medium",
+          "methodology": "Mechanism design with intermediary.",
+          "limitations": "",
+          "citations": []
+        }
+      ],
+      "critiques": [],
+      "citations": [],
+      "metadata": {}
+    },
+    {
+      "agent_role": "critic",
+      "phase": "critique",
+      "timestamp": "2026-05-09T01:45:34.992004",
+      "summary": "Four major issues, one minor. The propositions are directionally correct but oversimplify the information set (binary), the quality space (scalar), and the externalities (absent). Rigor 0.62 — refinement required before synthesis.",
+      "detailed_content": "Severity tally: 4 major, 1 minor.\nRigor score: 0.62 / 1.0. Below the 0.75 publishability threshold.\nDecision: REFINEMENT REQUIRED.",
+      "findings": [],
+      "critiques": [
+        {
+          "target": "P1 / setup",
+          "issue_type": "assumption",
+          "description": "Quality is treated as binary-info (observable or not). In practice schemas, summary stats, lineage docs partially reveal q. The interesting question is what happens at intermediate signal precision pi, not at the corners.",
+          "severity": "major",
+          "suggested_remedy": "Replace binary info-set with continuous signal s of precision pi(s); restate P1 as a function of pi."
+        },
+        {
+          "target": "P3 (samples)",
+          "issue_type": "logical",
+          "description": "Conflates informativeness with sufficiency. Samples can be biased (training-set leakage) or chosen adversely. A naive 1% sample is not a screening device.",
+          "severity": "major",
+          "suggested_remedy": "Require sample to be informative on the fit-for-purpose dimension AND drawn under verifiable protocol."
+        },
+        {
+          "target": "Quality dimensionality",
+          "issue_type": "scope",
+          "description": "All five propositions assume scalar q. Real data has at least four dimensions: recency, completeness, accuracy, fit-for-purpose. Aggregation hides information rents on the dimension the buyer actually values.",
+          "severity": "major",
+          "suggested_remedy": "Lift q to R^k and ask which mechanism dominates as a function of WHICH dimension is dispersed."
+        },
+        {
+          "target": "Externalities",
+          "issue_type": "scope",
+          "description": "Treating data as a private good ignores (a) replicability — buyer's use erodes seller's residual rent, and (b) privacy externalities on data subjects.",
+          "severity": "major",
+          "suggested_remedy": "Add a replication-discount term and a privacy-externality wedge; show these tighten reputation and regulation requirements."
+        },
+        {
+          "target": "Empirical evidence",
+          "issue_type": "empirical",
+          "description": "Existing data marketplaces (Dawex, AWS Data Exchange, Snowflake Marketplace) concentrate in geo, weather, and firmographic data — categories where quality is closest to a search good. Survivorship bias in the evidence base.",
+          "severity": "minor",
+          "suggested_remedy": "Caveat scope: results apply most cleanly to experience-good data; extrapolation to ML training data is an open empirical question."
+        }
+      ],
+      "citations": [],
+      "metadata": {
+        "rigor_score": 0.62,
+        "ready_for_synthesis": false
+      }
+    },
+    {
+      "agent_role": "theorist",
+      "phase": "refinement",
+      "timestamp": "2026-05-09T01:45:35.008465",
+      "summary": "Refinement: continuous signal precision replaces binary info-set; quality lifted to R^k with dimension-specific mechanism mapping; replicability discount tightens reputation requirement; privacy externality wedge added with explicit non-market remedy.",
+      "detailed_content": "Revised propositions:\n\nP1' (Continuous-signal unraveling). The unraveling threshold is\nsigma_q*(pi) increasing in signal precision pi. Schemas / lineage /\nsummary stats raise pi; standardised metadata is therefore an\ninfrastructural lever for market viability.\n\nP2' (Reputation under replicability). Cooperation rent decays at\nrate rho; the required discount factor becomes\ndelta*'(L, rho) = delta*(L) / (1 - rho). High-replicability data\nnarrows the set of feasible reputation equilibria.\n\nP3' (Sample protocols). Samples implement screening only when (a)\ninformative on the dimension valued, (b) drawn under a verifiable\nprotocol (random, sealed, third-party-attested), (c) not a perfect\nsubstitute. Without (b), sellers select the sample adversely.\n\nP4' (Outcome-contingent under attribution noise). Welfare loss from\nattribution noise sigma_a is bounded above by sigma_a * elasticity of\nseller effort; outcome-contingent dominates fixed pricing whenever\nsigma_a < seller-information advantage.\n\nP5' (Certification with skin-in-the-game). Rotation alone is\ninsufficient when network effects favour incumbents; certifier must\nhold a liability stake correlated with realised quality.\n\nP6 (Externalities). Privacy externalities on data subjects survive\nany buyer-seller mechanism. First-best requires either Coasean\ntransfers to subjects (often infeasible at scale) or regulatory caps\non q-disclosure (the GDPR / data-minimisation route).\n\nDimension -> mechanism mapping:\n  recency           -> outcome-contingent (lag is short)\n  completeness      -> sample + audit (verifiable cheaply)\n  accuracy          -> third-party certification (needs expertise)\n  fit-for-purpose   -> reputation + try-before-buy (use-revealed)",
+      "findings": [
+        {
+          "claim": "With a continuous ex-ante signal s of precision pi, the unraveling threshold sigma_q* is increasing in pi; markets sustain at moderate dispersion when schemas / summary stats / lineage are sufficiently informative.",
+          "evidence": "Generalised Akerlof under noisy signal; the limit pi -> 1 recovers full information, pi -> 0 recovers original P1.",
+          "confidence": "high",
+          "methodology": "Bayesian updating on signal s before pricing.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Mechanism dominance is a function of WHICH quality dimension is dispersed: recency -> outcome-contingent; completeness -> samples + audit; accuracy -> third-party certification; fit-for-purpose -> reputation + try-before-buy.",
+          "evidence": "Each dimension has a different observability profile post-purchase, which determines which mechanism's incentive constraint binds.",
+          "confidence": "medium",
+          "methodology": "Mapping dimension -> observability lag -> binding mechanism constraint.",
+          "limitations": "Mapping is conjectural; needs empirical calibration on marketplace transaction data.",
+          "citations": []
+        },
+        {
+          "claim": "Replicability discount tightens the reputation constraint: with discount rho(t), the cooperation rent decays, raising delta* and shrinking the set of markets where reputation alone suffices.",
+          "evidence": "Folk-theorem condition with decaying continuation value; binding faster for high-replicability data.",
+          "confidence": "high",
+          "methodology": "Repeated-game with decaying rents.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Privacy externalities create a wedge between social and private optima; no purely market mechanism internalises it. Coasean transfers to data subjects OR regulatory caps on disclosure are required.",
+          "evidence": "Acemoglu et al. (2022) theorem extended to quality-asymmetric setting; externality term survives any allocation mechanism on the buyer-seller pair alone.",
+          "confidence": "high",
+          "methodology": "Externality-augmented welfare analysis.",
+          "limitations": "",
+          "citations": []
+        }
+      ],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "refinement_round": 1
+      }
+    },
+    {
+      "agent_role": "critic",
+      "phase": "critique",
+      "timestamp": "2026-05-09T01:45:35.014524",
+      "summary": "All four major critiques addressed: continuous signal precision (P1'), dimension-specific mechanism mapping (new), replicability discount (P2'), privacy externality wedge (P6). Rigor 0.81 — READY for synthesis. One residual scope caveat retained.",
+      "detailed_content": "Major critiques addressed point-by-point:\n  - Binary info-set        -> resolved via continuous pi.\n  - Naive sample claim     -> resolved via verifiable protocol clause.\n  - Scalar q               -> resolved via R^k lift + mechanism map.\n  - Absent externalities   -> resolved via P6 + replicability discount.\n\nMinor critique (survivorship bias in empirical base) acknowledged\nand converted to a scope caveat in the synthesis: applies most\ncleanly to experience-good data; ML-training-data extrapolation\nflagged as open.\n\nRigor: 0.81 / 1.0. READY for synthesis.",
+      "findings": [],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "rigor_score": 0.81,
+        "ready_for_synthesis": true
+      }
+    },
+    {
+      "agent_role": "synthesizer",
+      "phase": "synthesis",
+      "timestamp": "2026-05-09T01:45:35.021225",
+      "summary": "Efficient allocation under ex-ante quality asymmetry requires at least one of four mechanism families to be operative AND independent internalisation of the privacy externality. Mechanism dominance is dimension-specific: recency -> outcome-contingent; completeness -> sample+audit; accuracy -> certification; fit-for-purpose -> reputation.",
+      "detailed_content": "# Data Marketplaces under Unobservable Quality — Synthesis\n\n## Question\nUnder what conditions does a data marketplace achieve efficient\nallocation when data quality is unobservable ex-ante?\n\n## Answer (compressed)\nA data marketplace can reach efficient allocation under ex-ante\nquality asymmetry iff at least one of four mechanism families is\noperative AND the privacy externality on data subjects is\nindependently internalised. The four families are:\n\n  1. **Continuous signaling** (schemas, lineage, summary stats) —\n     raises the unraveling threshold sigma_q*(pi) but does not by\n     itself separate types.\n  2. **Reputation under bounded replicability** — sustains efficient\n     allocation iff seller discount factor delta exceeds the\n     replicability-adjusted threshold delta*'(L, rho).\n  3. **Verifiable screening** (protocol-attested samples,\n     outcome-contingent royalties with bounded attribution noise) —\n     dominates when the dispersed dimension is observable\n     post-purchase.\n  4. **Skin-in-the-game certification** — restores allocation when\n     the dispersed dimension requires expertise to verify and the\n     certifier holds a liability stake correlated with realised\n     quality.\n\nMechanism dominance is **dimension-specific**, not universal:\n\n| Dispersed dimension | Dominant mechanism                |\n|---------------------|-----------------------------------|\n| Recency             | Outcome-contingent / royalties    |\n| Completeness        | Protocol-attested samples + audit |\n| Accuracy            | Third-party certification         |\n| Fit-for-purpose     | Reputation + try-before-buy       |\n\nThe privacy externality on data subjects survives any buyer-seller\nmechanism and requires either Coasean transfers (infeasible at scale)\nor regulatory disclosure caps.\n\n## Contribution\n- **Six refined propositions** (P1' through P6) with explicit\n  assumptions and identified failure modes.\n- **A dimension-to-mechanism mapping** that resolves the existing\n  literature's tension between reputation, screening, and\n  certification — they are not substitutes but specialists.\n- **A unified treatment of asymmetry, replicability, and privacy**\n  showing that mechanism design on the buyer-seller pair is\n  necessary but not sufficient for first-best.\n\n## Scope and limitations\n- Cleanest application: experience-good data (ML training sets,\n  research datasets). Extrapolation to search-good data (geo,\n  weather) is straightforward but uninformative — those markets\n  already work.\n- Survivorship bias warning: existing marketplace evidence\n  concentrates in easy categories. The interesting empirical test\n  is the population of data products that *failed* to clear.\n- Mechanism mapping is conjectural pending calibration on\n  marketplace transaction data.\n\n## Future research\n1. **Empirical calibration** of the dimension-to-mechanism mapping\n   against Snowflake Marketplace, AWS Data Exchange, and Dawex\n   transaction data; identify which mechanism each market actually\n   uses for each dimension.\n2. **Experimental test** of outcome-contingent pricing vs fixed\n   pricing in a controlled data-product setting; measure attribution-\n   noise tolerance.\n3. **Privacy-externality calibration**: estimate the wedge between\n   social and private optima for representative ML training datasets.\n4. **Bridge to Shapley attribution**: link the dimension-to-mechanism\n   mapping to data-Shapley value decomposition, so seller compensation\n   can be made dimension-specific.",
+      "findings": [],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "synthesis_path": "data/outputs/Infonomics_DataQualityMarkets_Synthesis.md"
+      }
+    }
+  ],
+  "refinement_rounds": 1,
+  "current_phase": null,
+  "next_phase": null,
+  "status": "completed",
+  "last_error": null,
+  "metadata": {}
+}
