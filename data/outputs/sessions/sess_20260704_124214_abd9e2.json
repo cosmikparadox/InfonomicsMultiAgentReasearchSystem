@@ -1,0 +1,330 @@
+{
+  "session_id": "sess_20260704_124214_abd9e2",
+  "question": "Across five empire case studies (Ottoman, Roman, Byzantine, Abbasid, Tang) applied to the same nine-domain CAS framework, what generalisations survive? Specifically: (a) cascade typology; (b) info-first hypothesis verdict; (c) adaptive-recovery typology and its predictive value.",
+  "domain": "historical_CAS_comparative",
+  "depth": "phd",
+  "started_at": "2026-07-04T12:42:14.461508",
+  "last_checkpoint_at": "2026-07-04T12:42:14.498326",
+  "completed_at": "2026-07-04T12:42:14.498270",
+  "outputs": [
+    {
+      "agent_role": "literature_reviewer",
+      "phase": "literature_review",
+      "timestamp": "2026-07-04T12:42:14.468753",
+      "summary": "Five prior sessions, one framework. Effective n across study = 3 independent institutional lineages: (1) Roman-Byzantine continuous per Kaldellis; (2) Islamicate Abbasid-Ottoman shared institutional inheritance; (3) Chinese Tang standalone. All five cases pass CAS framework applicability with composites 3.31-3.93 and peaks 3.83-4.56. Cascade patterns diverge (three types). Info-first verdict converges (five-for-five not supportive of strong form).",
+      "detailed_content": "Summary table across five sessions (all civ-comparable scoring):\n\n| Empire     | Composite | Peak (civ) | Cascade type            | Info-first  |\n|------------|-----------|------------|-------------------------|-------------|\n| Ottoman    | 3.31      | 3.83       | Staggered-endogenous    | Falsified   |\n| Roman (W)  | 3.78      | 4.39       | Simultaneous-endogenous | Equivocal   |\n| Roman (E)  | 4.05      | 4.39       | (continues to Byzantine)| -           |\n| Byzantine  | 3.76      | 4.39       | Exog+endog-fragility    | Not support |\n| Abbasid    | 3.88 (P)  | 4.39/4.44  | Staggered-endogenous    | Not support |\n| Tang       | 3.93      | 4.44 (civ) | Simultaneous-endogenous | Failed      |\n\nEffective independent lineages:\n  Lineage 1 (Roman-Byzantine): one continuous trajectory 264 BCE\n    to 1453 CE = 1717 years total. Two branches — West fails 476,\n    East fails 1453.\n  Lineage 2 (Islamicate Abbasid-Ottoman): Abbasid polity dies\n    945; institutional inheritance flows through Fatimid, Seljuk,\n    Ottoman successor units.\n  Lineage 3 (Chinese Tang): standalone; predecessor Han (220 CE\n    fall), successor Song (960 CE emergence) not in study.\n\nMonetary anchor ranking (stability duration at high purity):\n  1. Byzantine hyperpyron:  721 years (309-1030) at ~99% Au\n  2. Abbasid dinar:         ~350 years (690s-1050s) at 91-97% Au\n  3. Roman denarius:        ~300 years peak Ag stability\n  4. Tang kaiyuan tongbao:  ~286 years (621-907), bronze\n  5. Ottoman akce:          ~200 years pre-collapse silver",
+      "findings": [],
+      "critiques": [],
+      "citations": [
+        {
+          "title": "Ottoman CAS Synthesis",
+          "authors": [
+            "prior session"
+          ],
+          "year": 2026,
+          "source": "sess_20260509_014534_8307cd",
+          "doi": null,
+          "summary": "Composite 3.31; peak revised 3.83. Cascade: staggered-endogenous (~98y). Info-first: CLEAN FALSIFIED (tahrir 1715 post-dates 1683 military reversal by 32y). Recovery: Tanzimat (Type A, buys 84y)."
+        },
+        {
+          "title": "Roman CAS Synthesis",
+          "authors": [
+            "prior session"
+          ],
+          "year": 2026,
+          "source": "sess_20260704_120839_f33ed4",
+          "doi": null,
+          "summary": "Composite 3.78 (476 cut) / 4.05 (1453 cut). Peak 4.39. Cascade: simultaneous-endogenous (third-c crisis 235-284). Info-first: EQUIVOCAL (Meyer epigraphic decline pre-crisis but MacMullen/Woolf cultural component). Recovery: Diocletian (Type A, buys 150y W + 977y E)."
+        },
+        {
+          "title": "Byzantine CAS Synthesis",
+          "authors": [
+            "prior session"
+          ],
+          "year": 2026,
+          "source": "sess_20260704_122952_290961",
+          "doi": null,
+          "summary": "Composite 3.76; peak 4.39. Cascade: exogenous-shock-meets-endogenous-fragility (Fourth Crusade 1204). Info-first: NOT SUPPORTIVE. Recoveries: Iconoclasm (B), Komnenoi (C). Hyperpyron 99% Au stable 721 years (longest in study)."
+        },
+        {
+          "title": "Abbasid CAS Synthesis",
+          "authors": [
+            "prior session"
+          ],
+          "year": 2026,
+          "source": "sess_20260704_123428_196896",
+          "doi": null,
+          "summary": "Polity composite 3.88 (750-945); civ composite 4.11 (750-1258). Peak 4.39/4.44. Cascade: staggered-endogenous polity ~135y. Info-first: NOT SUPPORTIVE (info trails political). Recovery: NONE (ghulam attempt failed). Dinar 350y stability."
+        },
+        {
+          "title": "Tang CAS Synthesis",
+          "authors": [
+            "prior session"
+          ],
+          "year": 2026,
+          "source": "sess_20260704_123855_81501c",
+          "doi": null,
+          "summary": "Composite 3.93; peak dual 4.56/4.44. Cascade: simultaneous-endogenous (An Lushan 755-763). Info-first: FAILED (info collapses TOGETHER with political). Recovery: Yang Yan two-tax 780 (Type A, buys 95y). Only genuinely INDEPENDENT lineage in the study."
+        }
+      ],
+      "metadata": {}
+    },
+    {
+      "agent_role": "theorist",
+      "phase": "theoretical_analysis",
+      "timestamp": "2026-07-04T12:42:14.473390",
+      "summary": "Seven propositions: (1) framework applicable across all five; (2) three cascade types; (3) info-first strong form dead across three lineages; (4) adaptive-recovery typology A/B/C with wide durability variance; (5) political-civilizational decoupling common; (6) monetary metallurgy is highest-confidence anchor; (7) cascade-duration determinants are multivariate and not resolvable at n=5.",
+      "detailed_content": "Propositions summary — see Findings for full statements.\n\nFramework's biggest weakness surfaced by comparative view:\nthe scalar composite is uninformative for cross-empire ranking\nbecause domain-weighting is arbitrary. All five sessions ended\nup withdrawing scalar ranking claims. The domain-vector\nrepresentation is what survives.\n\nFramework's biggest strength: cascade typology emerged\norganically from the pipeline; the framework didn't force\ncases into a single template.",
+      "findings": [
+        {
+          "claim": "PROPOSITION 1 (framework applicability). The nine-domain CAS framework is INSTRUMENTALLY useful across all five empires despite their spanning ~2700 years and multiple civilizational lineages. Composites cluster in 3.31-3.93; peaks in 3.83-4.56. No case failed to score on any domain.",
+          "evidence": "Five cases, all scored, all rigor >=0.72.",
+          "confidence": "high",
+          "methodology": "Framework robustness check.",
+          "limitations": "Ordinal scoring; equal-domain weighting arbitrary.",
+          "citations": []
+        },
+        {
+          "claim": "PROPOSITION 2 (cascade typology). Three distinct cascade patterns are attested in the sample: (a) SIMULTANEOUS-ENDOGENOUS (Rome, Tang); (b) STAGGERED-ENDOGENOUS (Ottoman, Abbasid); (c) EXOGENOUS-SHOCK MEETING ENDOGENOUS FRAGILITY (Byzantine). No case falsifies the framework; the framework accommodates all three.",
+          "evidence": "Sessions Roman, Tang, Ottoman, Abbasid, Byzantine document each type.",
+          "confidence": "high",
+          "methodology": "Pattern extraction across five cases.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROPOSITION 3 (info-first hypothesis, strong form). Across three independent institutional lineages, zero cases support the strong form of the info-first hypothesis (informational-capital decline LEADS political failure). Two-of-five constitute explicit falsification (Ottoman clean; Tang via simultaneous). Weak form (info-capital as cascade component, not lead) survives all five.",
+          "evidence": "Cross-case timing analysis; Ottoman tahrir, Roman epigraphic ambiguity, Byzantine 1204, Abbasid political-civ decoupling, Tang census-drop simultaneity.",
+          "confidence": "high",
+          "methodology": "Multi-case falsification test.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROPOSITION 4 (adaptive-recovery typology). Three types documented: (A) administrative-institutional (Diocletian, Yang Yan, Tanzimat, attempted-failed Ghulam); (B) ideological-resolution (Iconoclasm); (C) dynastic-personal (Komnenoi, Nerva-Antonines). Type A durability varies 84-977 years — the type alone is a WEAK predictor of subsequent survival duration.",
+          "evidence": "Durability comparison within Type A.",
+          "confidence": "medium",
+          "methodology": "Type-durability variance analysis.",
+          "limitations": "Small sample per type.",
+          "citations": []
+        },
+        {
+          "claim": "PROPOSITION 5 (political-civilizational decoupling). In three of five cases (Rome, Abbasid, arguably Byzantine), political power collapses in one unit while informational/cultural capital migrates to and grows in successor units. This is COMMON, not exceptional, and undermines simple polity-only readings of 'system failure'.",
+          "evidence": "Rome East continues to 1453; Islamicate civ 1258; Byzantine cultural transmission to Italian Renaissance.",
+          "confidence": "high",
+          "methodology": "Multi-case decoupling analysis.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROPOSITION 6 (monetary anchoring). Each case's highest-confidence quantitative data comes from monetary metallurgy. Ranking by stability duration at high purity (BZ hyperpyron > Abbasid dinar > Roman denarius > Tang kaiyuan tongbao > Ottoman akce), the Byzantine dominates by 2x-3x margin. Monetary-stability duration correlates roughly with polity longevity but with wide variance.",
+          "evidence": "Metallurgical assay data across all five.",
+          "confidence": "high",
+          "methodology": "Cross-case monetary comparison.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROPOSITION 7 (cascade-duration determinants). Cascade duration ranges 50y (Rome 3rd-c intense phase) to 337y (Ottoman full). Determinants: (a) institutional slack; (b) presence/absence of Type A adaptive recovery; (c) exogenous shock timing. No single variable is sufficient. Presence of successful adaptive recovery is a necessary-but-not-sufficient condition for prolonged survival (Rome East, Ottoman) but not always available (Abbasid).",
+          "evidence": "Comparative cascade durations.",
+          "confidence": "medium",
+          "methodology": "Multi-variable pattern analysis.",
+          "limitations": "n=5 is small for multi-variable claims.",
+          "citations": []
+        }
+      ],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "propositions_count": 7,
+        "info_first_verdict": "strong_form_dead_weak_form_survives"
+      }
+    },
+    {
+      "agent_role": "critic",
+      "phase": "critique",
+      "timestamp": "2026-07-04T12:42:14.478306",
+      "summary": "Four major issues, three minor. Framework-applies proposition is trivial. Effective-n reporting should show multiple counts. Case pool has scope bias (monetary agricultural). Weak info-first is nearly unfalsifiable — needs sharpening. Type A durability variance should be reported as a NEGATIVE finding. Political-civ decoupling largely definitional. Monetary-longevity correlation unfounded at n=5. Rigor 0.66/1.0 — REFINEMENT REQUIRED.",
+      "detailed_content": "Severity: 4 major, 3 minor.\nRigor: 0.66 / 1.0.\nDecision: REFINEMENT REQUIRED.",
+      "findings": [],
+      "critiques": [
+        {
+          "target": "Framework applicability = triviality",
+          "issue_type": "logical",
+          "description": "Proposition 1's 'all five score' is nearly tautological — any rubric flexible enough to capture five diverse polities will 'apply'. Doesn't distinguish from a weak framework.",
+          "severity": "minor",
+          "suggested_remedy": "Reframe as 'framework does not OBVIOUSLY misfit any case' rather than 'applies robustly'."
+        },
+        {
+          "target": "Effective n=3 handwave",
+          "issue_type": "methodological",
+          "description": "Roman-Byzantine treated as one lineage per Kaldellis, but the Ottoman session ALSO argued Ottoman inherits Byzantine institutional forms (millet system, Constantinople as capital). If we're strict, Roman-Byzantine-Ottoman is ONE Mediterranean-Roman lineage. Effective n could be 2 (Roman-Med + Chinese) with Abbasid as a separate case.",
+          "severity": "major",
+          "suggested_remedy": "Report multiple lineage counts: conservative n=2 (Roman-Med, Chinese); moderate n=3; generous n=5. Show info-first verdict robust across counts."
+        },
+        {
+          "target": "Selection bias in case pool",
+          "issue_type": "scope",
+          "description": "All five empires are LATE agricultural with monetary state finance. Study excludes non-monetary states (Inca, pre-money agrarian), maritime empires (Athenian, Portuguese trading), steppe polities (Mongol, Xiongnu), and industrial-era (British, Soviet). Generalisations should be scoped to 'monetary agricultural empires', not 'complex adaptive systems' generally.",
+          "severity": "major",
+          "suggested_remedy": "State scope: monetary agricultural empires; note generalisation to other polity types requires further work."
+        },
+        {
+          "target": "Info-first weak form is unfalsifiable",
+          "issue_type": "logical",
+          "description": "Saying 'info-capital is a component of cascade' is nearly unfalsifiable — any polity that fails will show SOME information-domain degradation. The weak form is a very weak conclusion.",
+          "severity": "major",
+          "suggested_remedy": "Sharpen weak form: info-capital degradation is a NECESSARY COMPONENT (empirical claim, falsifiable) vs a SUFFICIENT COMPONENT (falsified). Or drop the weak form."
+        },
+        {
+          "target": "Type A durability variance = null result",
+          "issue_type": "logical",
+          "description": "Reporting 'Type A varies 84-977 years' is functionally a null result — the typology doesn't predict durability. Should be foregrounded as a NEGATIVE finding: adaptive-recovery type by itself is not a durability predictor.",
+          "severity": "minor",
+          "suggested_remedy": "Report as negative finding; propose durability predictors (institutional slack, external environment) for future work."
+        },
+        {
+          "target": "Political-civ decoupling = definitional",
+          "issue_type": "logical",
+          "description": "Proposition 5 is largely definitional — any polity that outlives its political leadership WILL show political-civ decoupling. The claim adds nothing beyond noting that civilizational institutions can persist past sovereign extinction.",
+          "severity": "minor",
+          "suggested_remedy": "Reframe as: 'the CAS framework must specify polity vs civilization as the unit of analysis and be explicit about successor-unit tracking'."
+        },
+        {
+          "target": "Monetary anchoring correlation with longevity",
+          "issue_type": "empirical",
+          "description": "Prop 6 claims monetary-stability duration 'correlates roughly with polity longevity'. At n=5 with wide variance this is unfounded — Ottoman has shortest monetary stability but second-longest total duration.",
+          "severity": "major",
+          "suggested_remedy": "Withdraw correlation claim; report monetary as HIGHEST CONFIDENCE ANCHOR without implicit predictive claim."
+        }
+      ],
+      "citations": [],
+      "metadata": {
+        "rigor_score": 0.66,
+        "ready_for_synthesis": false
+      }
+    },
+    {
+      "agent_role": "theorist",
+      "phase": "refinement",
+      "timestamp": "2026-07-04T12:42:14.484881",
+      "summary": "Refinement: (1) framework claim weakened to 'no obvious misfit'; (2) info-first robust at three lineage counts; (3) scope narrowed to monetary agricultural empires; (4) weak form sharpened to necessity claim; (5) Type A durability reported as negative finding with external-environment hypothesis; (6) polity/civ decoupling as framework prescription; (7) monetary-longevity correlation withdrawn.",
+      "detailed_content": "Full detail in Findings.",
+      "findings": [
+        {
+          "claim": "PROP 1 REVISED (framework fit). The framework does not OBVIOUSLY misfit any of the five cases — a weaker claim than 'applies robustly'. This distinguishes it from a strict falsification but does not establish predictive power.",
+          "evidence": "Rescoped claim.",
+          "confidence": "high",
+          "methodology": "Weakening for defensibility.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROP 2 REVISED (cascade typology, multi-n). Report info-first verdict at three different lineage counts: (a) n=2 (Roman-Med lineage spanning Rome-Byzantine-Ottoman + Chinese Tang): zero support at either lineage; (b) n=3 (Roman-Byzantine + Islamicate + Chinese): zero support; (c) n=5 (all cases treated independently): zero-of-five. VERDICT IS ROBUST TO LINEAGE-COUNTING CHOICE.",
+          "evidence": "Robustness check across counts.",
+          "confidence": "high",
+          "methodology": "Multiple-n sensitivity.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROP 3 REVISED (scope). Findings apply to MONETARY AGRICULTURAL EMPIRES specifically. Explicitly OUT OF SCOPE: non-monetary polities (pre-money agrarian, Inca), maritime commercial empires (Athenian, Portuguese trade network), steppe/nomadic polities (Mongol, Xiongnu), and industrial-era states (British, Soviet). Generalising to these categories requires separate work.",
+          "evidence": "Scope statement.",
+          "confidence": "high",
+          "methodology": "Explicit scope narrowing.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROP 4 REVISED (info-first weak form). Sharpened to falsifiable claim: 'Information-capital degradation is a NECESSARY component of the cascade in monetary agricultural empires'. This is testable: falsified if any case shows political failure WITHOUT info-capital degradation in the same window. Empirically: all five cases show info-capital degradation in some domain, so the necessary-component claim survives — but is NOT the same as the strong claim (LEADS).",
+          "evidence": "Necessity vs sufficiency clarification.",
+          "confidence": "high",
+          "methodology": "Logical sharpening.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "NEGATIVE FINDING (Type A durability): administrative-institutional adaptive recovery type does NOT by itself predict subsequent survival duration. Range 84-977 years within the type. Proposed hypothesis for future work: the durability difference between short-lived Type A recoveries (Yang Yan 95y, Tanzimat 84y) and long-lived ones (Diocletian 977y East) is explained by external threat environment, not internal reform quality.",
+          "evidence": "Durability comparison.",
+          "confidence": "medium",
+          "methodology": "Negative-finding reframing.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROP 5 REVISED (polity vs civ). Reframed as framework requirement: any CAS study must specify unit of analysis (polity or civilization) and track successor-unit inheritance. Political failure ≠ civilizational failure in three of five cases. This is a framework prescription, not a novel empirical finding.",
+          "evidence": "Definitional restatement.",
+          "confidence": "high",
+          "methodology": "Prescriptive reframing.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "PROP 6 REVISED (monetary anchor). Monetary metallurgy is the HIGHEST-CONFIDENCE quantitative anchor across all five cases and should be reported as such. NO CLAIM about correlation with longevity — the Ottoman counter-example (short monetary stability, long polity duration) kills that.",
+          "evidence": "Ottoman as counter-example.",
+          "confidence": "high",
+          "methodology": "Correlation claim withdrawal.",
+          "limitations": "",
+          "citations": []
+        }
+      ],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "refinement_round": 1,
+        "info_first_robust_at_lineage_counts": [
+          2,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "agent_role": "critic",
+      "phase": "critique",
+      "timestamp": "2026-07-04T12:42:14.489831",
+      "summary": "All majors addressed. Framework claim honestly weakened. Info-first verdict shown robust across lineage-count choices. Scope explicitly narrowed. Weak form now falsifiable. Type A durability treated as negative finding. Monetary correlation withdrawn. Rigor 0.81/1.0 — READY for synthesis.",
+      "detailed_content": "Round-2: all critiques addressed appropriately.\nRigor: 0.81/1.0.\nDecision: READY for synthesis.",
+      "findings": [],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "rigor_score": 0.81,
+        "ready_for_synthesis": true
+      }
+    },
+    {
+      "agent_role": "synthesizer",
+      "phase": "synthesis",
+      "timestamp": "2026-07-04T12:42:14.495683",
+      "summary": "Seven refined propositions after critique. Cascade typology (3 types), info-first strong form dead across all lineage-count conventions, adaptive-recovery A/B/C typology with NEGATIVE FINDING on durability, framework prescription for polity/civ unit, monetary metallurgy as highest-confidence anchor. Scope narrowed to monetary agricultural empires. Multiple withdrawn claims listed. Five future-work directions identified.",
+      "detailed_content": "# Comparative CAS Synthesis: Five Empires, One Framework\n\n## Question\nAcross Ottoman, Roman, Byzantine, Abbasid, and Tang case studies\nusing the same nine-domain CAS framework, what generalisations\nsurvive critique?\n\n## Scope statement (critical)\n\nThese findings apply to **monetary agricultural empires**. Out\nof scope: non-monetary agrarian polities, maritime commercial\nempires (Athenian, Portuguese trade network), steppe/nomadic\npolities (Mongol, Xiongnu), and industrial-era states.\nGeneralising to those categories requires separate work.\n\n## Case summary\n\n| Empire | Composite | Peak (civ) | Cascade | Info-first | Recovery |\n|---|---|---|---|---|---|\n| Ottoman | 3.31 | 3.83 | Staggered-endog | **Falsified** | Tanzimat A/84y |\n| Roman (W) | 3.78 | 4.39 | Simultaneous-endog | Equivocal | Diocletian A/150y+977y |\n| Byzantine | 3.76 | 4.39 | Exog+endog-fragility | Not supportive | Iconoclasm B / Komnenoi C |\n| Abbasid | 3.88 | 4.39 | Staggered-endog | Not supportive | **NONE** (ghulam A failed) |\n| Tang | 3.93 | 4.44 | Simultaneous-endog | Failed | Yang Yan A/95y |\n\n## Seven refined propositions\n\n### 1. Framework fit\n\nThe nine-domain framework does **not obviously misfit** any of\nthe five cases — a weak but defensible claim. Composites cluster\n3.31-3.93; peaks 3.83-4.44. No case failed to score on any\ndomain. This does not establish predictive power, only\nnon-refutation.\n\n### 2. Cascade typology (three types)\n\n- **Simultaneous-endogenous**: Rome (third-c crisis 235-284),\n  Tang (An Lushan 755-763). Multiple domains collapse within\n  ~5-50 years.\n- **Staggered-endogenous**: Ottoman (economic 1585 → military\n  1683, ~98y), Abbasid (813 fitna → 945 Buyid entry, ~135y).\n  Sequential domain failures separated by ~100y.\n- **Exogenous-shock meeting endogenous fragility**: Byzantine\n  (Fourth Crusade 1204 on a post-Manzikert-fragile base).\n  Shock magnitude modest, consequence total.\n\nNo case falsifies the CAS framework; the framework accommodates\nall three patterns.\n\n### 3. Info-first hypothesis (STRONG FORM DEAD)\n\nRobust across three lineage-count conventions:\n\n| Lineage count | Verdict |\n|---|---|\n| n=2 (Roman-Med + Chinese) | 0/2 support |\n| n=3 (Roman-Byz + Islamicate + Chinese) | 0/3 support |\n| n=5 (all independent) | 0/5 support |\n\n**Ottoman is the only clean explicit falsification** (tahrir 1715\npost-dates the 1683 military reversal by 32 years — info collapse\nLAGS political failure). Roman is equivocal (Meyer 1990 shows\nepigraphic decline pre-dates crisis, but MacMullen/Woolf show\ncultural-fashion component). Byzantine, Abbasid, Tang do not\nsupport the strong form for various reasons (exogenous shock,\npolitical-civ decoupling, simultaneous collapse).\n\n**Weak form sharpened** to falsifiable statement:\n> *Information-capital degradation is a NECESSARY component of\n> cascade in monetary agricultural empires.*\n\nThis survives all five cases (each shows some info-domain\ndegradation during cascade). It is NOT the same as the strong\nform (info-capital degradation LEADS).\n\n### 4. Adaptive-recovery typology (A/B/C) + NEGATIVE FINDING\n\nThree types documented:\n\n- **Type A — administrative-institutional**: Diocletian\n  (Rome/Byz, 284), Yang Yan (Tang, 780), Tanzimat (Ottoman,\n  1839), Ghulam-system (Abbasid, 833 — **FAILED**).\n- **Type B — ideological-resolution**: Iconoclasm resolution\n  (Byz, 843).\n- **Type C — dynastic-personal**: Komnenoi (Byz, 1081-1118),\n  Nerva-Antonines (Rome, 96-180).\n\n**Negative finding**: Type A durability varies 84-977 years.\nThe type by itself is NOT a predictor of subsequent survival.\n\nHypothesis for future work: **the external threat environment\n(not internal reform quality) is what distinguishes short-lived\nType A recoveries (Yang Yan 95y facing Huang Chao; Tanzimat 84y\nfacing European great powers) from long-lived ones (Diocletian\nEast 977y before Ottoman conquest).**\n\n### 5. Framework requirement (polity vs civilization)\n\nAny CAS study of an empire must specify unit of analysis and\ntrack successor-unit inheritance:\n\n- Rome polity dies 476 W / 1453 E, but Roman legal tradition\n  continues into modern civil law.\n- Abbasid polity dies 945, but Islamicate civilization continues\n  under Seljuk, Fatimid, Cordoba until Mongol 1258 (and\n  fragmentarily after).\n- Byzantine cultural transmission to Italian Renaissance.\n\nThis is a **framework prescription**, not a novel empirical\nfinding. Sessions that conflate polity with civilization produce\nfalse \"inversions\" or false \"collapses\" depending on cut choice.\n\n### 6. Monetary metallurgy is the highest-confidence anchor\n\nAcross all five cases, the strongest quantitative data are\nmetallurgical assays:\n\n| Anchor | Stability duration | Purity |\n|---|---|---|\n| Byzantine hyperpyron | **721 y** (309-1030) | ~99% Au |\n| Abbasid dinar | ~350 y (690s-1050s) | 91-97% Au |\n| Roman denarius | ~300 y peak | ~90% Ag |\n| Tang kaiyuan tongbao | ~286 y (621-907) | bronze |\n| Ottoman akce | ~200 y pre-collapse | 1.15-1.20g Ag |\n\n**NO CLAIM** about monetary stability predicting polity\nlongevity — Ottoman has the shortest stability and second-longest\npolity duration, refuting any simple correlation. Monetary is\nthe empirical anchor, not the diagnostic.\n\n### 7. Cascade duration determinants (unresolved at n=5)\n\nCascade duration range: ~50y (Rome third-c intense phase) to\n337y (Ottoman full). Determinants appear multivariate:\ninstitutional slack, presence/absence of Type A adaptive\nrecovery, exogenous shock timing. No single variable is\nsufficient at n=5.\n\n## Contributions\n\n- **Cascade typology**: three empirically-attested types\n  (simultaneous, staggered, exogenous-shock-on-fragility).\n- **Info-first strong form falsified** at effective n=3\n  lineages, robust across lineage-count conventions.\n- **Weak form sharpened** to falsifiable necessity claim.\n- **Adaptive-recovery typology A/B/C** proposed; Type A\n  durability variance identified as **negative finding**,\n  with external-threat-environment as hypothesis.\n- **Framework prescription**: specify polity vs civilization\n  unit and track successor inheritance.\n- **Monetary metallurgy** established as the highest-\n  confidence quantitative anchor across the sample.\n\n## Withdrawn claims (from source sessions, this synthesis, or both)\n\n- Roman \"Ottoman highest in knowledge base\" scalar ranking\n  (Ottoman session).\n- Roman \"highest peak in study\" (Tang session).\n- Roman > Ottoman scalar dominance (Roman session).\n- Abbasid \"info-first inversion\" as a genuine inversion rather\n  than unit shift (Abbasid session).\n- Monetary-stability → polity-longevity correlation (this session).\n- Type A adaptive-recovery type as durability predictor (this\n  session).\n- \"Framework applies robustly\" — weakened to \"does not obviously\n  misfit\" (this session).\n\n## Future work\n\n1. **Same-lineage extensions**: Han China (Chinese lineage);\n   Sassanian Persia (adds a lineage); Fatimid Egypt (Islamicate\n   independent branch).\n2. **Out-of-scope test**: apply framework to maritime commercial\n   empire (Athenian, Venetian) or steppe polity (Mongol) to\n   test scope statement.\n3. **Cascade duration model**: formalize institutional slack\n   + shock timing + adaptive recovery success into a testable\n   duration prediction.\n4. **Sharpened info-first alternative**: if strong form is dead\n   and weak form is nearly tautological, propose a middle-strength\n   hypothesis that is both non-trivial and falsifiable.\n5. **External-threat-environment hypothesis for Type A durability**:\n   calibrate against comparative geopolitical environments at\n   the moment of each Type A recovery.",
+      "findings": [],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "synthesis_path": "data/outputs/Comparative_CAS_Synthesis.md",
+        "propositions_final": 7,
+        "info_first_strong_form": "dead",
+        "info_first_weak_form": "necessity_only",
+        "scope": "monetary_agricultural_empires"
+      }
+    }
+  ],
+  "refinement_rounds": 1,
+  "current_phase": null,
+  "next_phase": null,
+  "status": "completed",
+  "last_error": null,
+  "metadata": {
+    "framework_version": "nine_domain_v1",
+    "source_sessions": [
+      "sess_20260509_014534_8307cd (Ottoman)",
+      "sess_20260704_120839_f33ed4 (Roman)",
+      "sess_20260704_122952_290961 (Byzantine)",
+      "sess_20260704_123428_196896 (Abbasid)",
+      "sess_20260704_123855_81501c (Tang)"
+    ],
+    "effective_n_lineages": 3
+  }
+}

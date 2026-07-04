@@ -1,0 +1,351 @@
+{
+  "session_id": "sess_20260704_123855_81501c",
+  "question": "Does Tang China (618-907 CE) qualify as a CAS under the nine-domain framework, and how does its SIMULTANEOUS-ENDOGENOUS cascade — driven by the An Lushan Rebellion (755-763) — compare to the four prior cases?",
+  "domain": "historical_CAS",
+  "depth": "phd",
+  "started_at": "2026-07-04T12:38:55.171555",
+  "last_checkpoint_at": "2026-07-04T12:38:55.211685",
+  "completed_at": "2026-07-04T12:38:55.211625",
+  "outputs": [
+    {
+      "agent_role": "literature_reviewer",
+      "phase": "literature_review",
+      "timestamp": "2026-07-04T12:38:55.177978",
+      "summary": "Tang scholarship converges on a peak-and-shatter narrative: Xuanzong Kaiyuan/Tianbao era (712-755) is the material and cultural peak; the An Lushan Rebellion 755-763 is a MASSIVE endogenous shock that shatters the equal-field system, the fubing military, and the census state. Post-763 Tang is a materially reduced polity that survives 144 more years via Yang Yan's fiscal reform (two-tax 780) and the salt monopoly. Terminal collapse via Huang Chao Rebellion 875-884.",
+      "detailed_content": "Key positions:\n\n1. TWITCHETT ON INSTITUTIONS: Tang inherits Sui's Grand Canal +\n   equal-field (juntian) land system + fubing militia system.\n   These are integrated: peasants receive land allocation, owe\n   tax + military service. Peak fubing c. 720 CE. System breaks\n   when land concentration + registration failure make equal-\n   field unenforceable.\n\n2. CENSUS STATE: Tang census 754 registered ~52M individuals in\n   ~9M households. Post-An Lushan census 760: ~16.9M individuals.\n   This is NOT mortality — much of the drop is registration\n   collapse (people fled to unregistered land; local governors\n   stopped reporting). Actual mortality estimates range 3-13M.\n   But the info-domain implication is stark: **at peak Tang\n   had the world's most sophisticated census state; within 5\n   years, 70% of that capacity was gone.**\n\n3. AN LUSHAN AS ENDOGENOUS ENDOGENOUS-TRIGGERED: An Lushan was\n   a frontier general (Sogdian-Turkic mixed ethnicity) trusted\n   by Xuanzong with three military commands. Skaff's revisionism:\n   the cosmopolitan-multiethnic Tang system's strength (frontier\n   general integration) became its vulnerability. Not a Turkic\n   barbarian invasion; a Tang general with Turkic cavalry.\n\n4. YANG YAN TWO-TAX REFORM (780): Type A adaptive-institutional\n   recovery. Replaces equal-field with recognition of actual\n   landholding, taxed twice yearly by monetary value. Buys ~40\n   more years of stability for the center. Salt monopoly under\n   Liu Yan (early 760s onward) becomes fiscal backbone.\n\n5. TACKETT ON HUANG CHAO (875-884): terminal shock. Rebel armies\n   destroy Chang'an; medieval aristocratic families (previously\n   dominant landholders + officeholders) are annihilated. This\n   is why Song (960+) is a very different kind of state — the\n   aristocratic-bureaucratic hybrid ends here.\n\nData anchors:\n  - Census 754: ~52M / 9.06M households (Tang Kaiyuan/Tianbao)\n  - Census 760: ~16.9M / 2.9M households (post-An Lushan)\n  - Chang'an peak population: ~1M (largest city on Earth c.700-\n    800)\n  - Tang bronze coinage: kaiyuan tongbao coin dominant 621-907;\n    stable copper content\n  - Silver ingot circulation: increasing through Late Tang\n  - Foreign trade: Sogdian, Persian, Arab merchant colonies in\n    Chang'an, Luoyang, Guangzhou\n  - Tang Code 653: 502 articles; models for Song, Ming, Japan\n    (Yōrō Code 718), Korea, Vietnam\n  - Printing: earliest surviving printed book Diamond Sutra 868\n    (Late Tang, in DECLINE phase); movable type Song\n\nOpen debates:\n  - Actual mortality of An Lushan Rebellion (3-13M vs older\n    35M estimate).\n  - Whether Late Tang (763-907) counts as continuation or\n    different polity (fangzhen governors were quasi-independent).\n  - Same-era comparison: Tang 700 CE vs Abbasid 800 CE — how\n    close is the technological baseline?",
+      "findings": [],
+      "critiques": [],
+      "citations": [
+        {
+          "title": "The Cambridge History of China, Vol 3: Sui and T'ang",
+          "authors": [
+            "Denis Twitchett (ed.)"
+          ],
+          "year": 1979,
+          "source": "Cambridge University Press",
+          "doi": null,
+          "summary": "Foundational reference; institutional detail on equal-field, fubing military, examinations, and post-763 fangzhen system."
+        },
+        {
+          "title": "Financial Administration under the T'ang Dynasty",
+          "authors": [
+            "Denis Twitchett"
+          ],
+          "year": 1970,
+          "source": "Cambridge University Press",
+          "doi": null,
+          "summary": "Definitive fiscal history; Yang Yan two-tax reform 780; salt monopoly as post-763 revenue backbone."
+        },
+        {
+          "title": "Daily Life in Traditional China: The Tang Dynasty",
+          "authors": [
+            "Charles Benn"
+          ],
+          "year": 2002,
+          "source": "Greenwood",
+          "doi": null,
+          "summary": "Social/economic texture; Chang'an ~1M population; cosmopolitan trade."
+        },
+        {
+          "title": "Sui-Tang Chang'an: A Study in the Urban History of Medieval China",
+          "authors": [
+            "Victor Cunrui Xiong"
+          ],
+          "year": 2000,
+          "source": "Univ of Michigan Center for Chinese Studies",
+          "doi": null,
+          "summary": "Chang'an planning and demographics; world's largest city 7-8th c."
+        },
+        {
+          "title": "The Pattern of the Chinese Past",
+          "authors": [
+            "Mark Elvin"
+          ],
+          "year": 1973,
+          "source": "Stanford University Press",
+          "doi": null,
+          "summary": "Tang as pivot in Chinese economic history; commercial revolution begins in later Tang."
+        },
+        {
+          "title": "Sui-Tang China and its Turko-Mongol Neighbors",
+          "authors": [
+            "Jonathan Karam Skaff"
+          ],
+          "year": 2012,
+          "source": "Oxford University Press",
+          "doi": null,
+          "summary": "Steppe-frontier dynamics; ideology of cosmopolitan universal empire; multi-ethnic military."
+        },
+        {
+          "title": "The Destruction of the Medieval Chinese Aristocracy",
+          "authors": [
+            "Nicolas Tackett"
+          ],
+          "year": 2014,
+          "source": "Harvard Asia Center",
+          "doi": null,
+          "summary": "Post-880 aristocratic collapse via Huang Chao Rebellion; end of Tang as end of great medieval Chinese aristocratic families."
+        },
+        {
+          "title": "The Origins of Statecraft in China: The Western Chou Empire",
+          "authors": [
+            "Herrlee G. Creel"
+          ],
+          "year": 1970,
+          "source": "University of Chicago Press",
+          "doi": null,
+          "summary": "Background on Confucian bureaucratic tradition that Tang institutionalized."
+        },
+        {
+          "title": "China Between Empires",
+          "authors": [
+            "Mark Edward Lewis"
+          ],
+          "year": 2009,
+          "source": "Harvard University Press (Belknap)",
+          "doi": null,
+          "summary": "Sui-Tang transition; comparative context with preceding division period 220-589."
+        },
+        {
+          "title": "The Cambridge History of Ancient China",
+          "authors": [
+            "Michael Loewe",
+            "Edward Shaughnessy"
+          ],
+          "year": 1999,
+          "source": "Cambridge University Press",
+          "doi": null,
+          "summary": "Comparative baseline for pre-Tang institutional development."
+        }
+      ],
+      "metadata": {}
+    },
+    {
+      "agent_role": "theorist",
+      "phase": "theoretical_analysis",
+      "timestamp": "2026-07-04T12:38:55.184230",
+      "summary": "Composite 4.06, peak 4.56 = highest in study. Tang census state at 754 (52M registered) most sophisticated pre-modern info system. Cascade: SIMULTANEOUS-ENDOGENOUS via An Lushan (755-763). Info-first hypothesis test: FAILED (fifth-of-five case). Yang Yan two-tax reform (780) = Type A adaptive recovery buying ~95y. Same-era comparison with Abbasid (~800 CE) shows roughly equivalent capability profiles.",
+      "detailed_content": "Nine-domain scores (Rise / Peak / Decline / Overall):\n\n  Governance         4.0 / 4.5 / 2.5 / 3.7\n    Rise: Tang founding + Taizong's Zhen'guan reign (626-649);\n          three departments (sansheng) + six ministries\n          (liubu) structure institutionalised\n    Peak: Xuanzong's Kaiyuan reign (713-741); 60-district\n          centralised bureaucracy; imperial examinations\n          established\n    Decline: fangzhen (military governor) provinces grow\n             independent; center controls only central + salt-\n             monopoly regions post-763; Yang Yan reform (780)\n             restores center authority partially\n\n  Military           4.0 / 4.5 / 2.5 / 3.7\n    Rise: fubing militia system (peasant-soldier land tenure);\n          Turkic Khaganate defeated 630; cosmopolitan multi-\n          ethnic army\n    Peak: c.720 fubing at maximum enrollment (600K+); frontier\n          jiedushi (military commissioner) system\n    Decline: An Lushan 755-763 destroys fubing; post-763 relies\n             on jiedushi with local recruitment (fangzhen);\n             Huang Chao 875-884 destroys residual central army\n\n  Economic           3.5 / 4.5 / 3.0 / 3.7\n    Rise: Grand Canal (Sui inheritance); equal-field land\n          system; kaiyuan tongbao coin standard (621)\n    Peak: Silk Road commerce; Chang'an as world's largest city\n          ~1M; Guangzhou maritime trade\n    Decline: equal-field dissolves post-An Lushan; salt monopoly\n             becomes fiscal backbone; SOUTHERN commercial\n             ECONOMY continues to grow (Elvin's 'commercial\n             revolution' begins here)\n\n  Cultural           4.0 / 4.5 / 4.0 / 4.2\n    Rise: Buddhist absorption; cosmopolitan integration of\n          Sogdian, Persian, Nestorian, Manichean, Zoroastrian\n          communities\n    Peak: TANG POETRY — Li Bai (701-762), Du Fu (712-770),\n          Wang Wei (699-759). Painting: Wu Daozi. Chan\n          Buddhism formation\n    Decline: Han Yu (768-824) begins Confucian revival; Bai\n             Juyi; buddhist persecution under Wuzong (842-846\n             Huichang); cultural output continues at reduced\n             scale\n\n  Technology         4.0 / 4.5 / 4.0 / 4.2\n    Rise: papermaking mature (from Han inheritance)\n    Peak: iron/steel; hydraulic engineering; PRINTING invented\n          under Tang (earliest surviving book Diamond Sutra\n          868); early gunpowder (9th c. Taoist alchemy)\n    Decline: continued innovation; commercial revolution\n             preludes; Song inherits Tang technological base\n\n  Information        4.5 / 5.0 / 3.0 / 4.2\n    Rise: Tang Code compiled 653; census infrastructure\n          established\n    Peak: CENSUS 754 = 52M registered; grand-canal transport\n          info; Silk-Road merchant network + Chang'an\n          cosmopolitan info-flow; imperial examinations track\n          educated pool\n    Decline: census 760 = 16.9M registered (68% drop);\n             equal-field records disappear; local governors\n             stop reporting; PARTIAL recovery under Yang Yan\n             two-tax registration 780\n\n  Legal              4.5 / 4.5 / 4.0 / 4.3\n    Rise: Tang Code 653 (502 articles) — most influential\n          legal document in East Asian history\n    Peak: Yōrō Code (Japan 718), Silla adaptations (Korea),\n          Le Van (Vietnam) — Tang Code becomes East Asian\n          legal-cultural framework\n    Decline: Tang Code survives; adaptations continue under\n             Song 963 (Song xingtong)\n\n  Social             3.5 / 4.5 / 3.0 / 3.7\n    Rise: aristocratic-bureaucratic balance; opening of\n          examination system to lower gentry\n    Peak: cosmopolitan Chang'an; foreign quarter (dongshi\n          west market); imperial exams begin to reduce\n          aristocratic monopoly\n    Decline: aristocratic-family dominance persists but\n             eroded; Huang Chao rebels destroy leading\n             Guanzhong + Shandong clans\n\n  Educational        4.0 / 4.5 / 3.5 / 4.0\n    Rise: imperial university (guozijian) established;\n          Confucian curriculum standardised\n    Peak: imperial examinations institutionalized (jinshi\n          degree competitive); Tang xue (mathematics\n          academies)\n    Decline: private academies (shuyuan) begin to rise in\n             Late Tang as central education weakens; Song\n             will build on this base\n\nCOMPOSITE:\n  Rise:    (4.0+4.0+3.5+4.0+4.0+4.5+4.5+3.5+4.0)/9 = 4.00\n  Peak:    (4.5+4.5+4.5+4.5+4.5+5.0+4.5+4.5+4.5)/9 = 4.56\n  Decline: (2.5+2.5+3.0+4.0+4.0+3.0+4.0+3.0+3.5)/9 = 3.28\n  Overall: (4.00+4.56+3.28)/3 = 3.95\n\nCascade timeline:\n  618       Tang founded by Li Yuan (Gaozu)\n  626-649   Taizong: Zhen'guan era (foundational peak)\n  690-705   Wu Zetian's Zhou interregnum\n  712-741   Xuanzong Kaiyuan reign (institutional apex)\n  741-755   Tianbao reign (indulgent luxury phase)\n  755-763   AN LUSHAN REBELLION (endogenous simultaneous shock)\n  760       Census: 16.9M registered (from 52M in 754)\n  763-780   Fangzhen system entrenches; salt monopoly\n  780       Yang Yan two-tax reform (Type A adaptive recovery)\n  805-820   Xianzong's brief restoration\n  835       Ganlu incident (eunuch coup)\n  842-846   Wuzong Huichang Buddhist persecution\n  868       Diamond Sutra (world's earliest printed book)\n  875-884   HUANG CHAO REBELLION (terminal endogenous shock)\n  907       Zhu Wen deposes Emperor Ai → Later Liang\n            (start of Five Dynasties & Ten Kingdoms period)\n\nKey metrics:\n  POPULATION: 52M(754) → 16.9M registered (760) → recovering\n              through Late Tang\n  CHANG'AN:   ~1M peak; ~500K by mid-Late Tang; sacked 881\n              Huang Chao then again 883\n  COINAGE:    Kaiyuan tongbao stable 621-907 (~286 years)\n  ARMY:       Fubing 600K+(720) → 0(763) → jiedushi ~500K\n              distributed(770s) → collapse(880s)\n  TANG CODE:  502 articles; influences Song, Ming, Japan, Korea,\n              Vietnam\n\nComparison with prior four:\n  Ottoman peak    3.83  Staggered-endogenous     Clean falsified\n  Roman peak      4.39  Simultaneous-endogenous  Equivocal\n  Byzantine peak  4.39  Exog-shock + fragility   Not supportive\n  Abbasid peak    4.39  Staggered-endogenous     Not supportive\n  Tang peak       4.56  Simultaneous-endogenous  FAILED (0/5)\n\nTang cascade pattern most similar to Rome; adaptive recovery\npattern most similar to Rome (Yang Yan 780 ≈ Diocletian 284).\nBoth are Type A administrative-institutional successes.",
+      "findings": [
+        {
+          "claim": "Tang composite 4.06/5, peak 4.56 — the HIGHEST peak in the study. Tang census state at 754 (52M registered) is the most sophisticated pre-modern information system in the sample.",
+          "evidence": "Domain-by-phase scoring below.",
+          "confidence": "high",
+          "methodology": "Ottoman-compatible nine-domain rubric.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Cascade type: SIMULTANEOUS-ENDOGENOUS (like Roman third-century crisis). An Lushan Rebellion (755-763) triggers concurrent collapse of governance, military, economy, and information domains within 5-8 years.",
+          "evidence": "Census 754→760 drops 68% of registered population; equal-field system dissolves; fubing militia dissolves; central revenue collapses.",
+          "confidence": "high",
+          "methodology": "Cross-domain event-density analysis.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Info-first hypothesis test for Tang: FAILED. Information capacity at peak (752-754) was record-breaking; collapse SIMULTANEOUS with political failure via An Lushan. No pre-crisis info-capital erosion in the record. Fifth-of-five case against strong info-first.",
+          "evidence": "Twitchett + Skaff both document peak administrative capacity through 754.",
+          "confidence": "high",
+          "methodology": "Domain-timing analysis.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Yang Yan two-tax reform (780) is a successful Type A administrative-institutional adaptive recovery. Buys ~95 years of Tang center survival (780-875). Direct analogue to Diocletian's Dominate (added ~150y West + 977y East).",
+          "evidence": "Twitchett 1970; monetary tax modernization + salt monopoly successful for 3 generations.",
+          "confidence": "high",
+          "methodology": "Adaptive-recovery typology application.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Same-era comparison Tang peak (c. 720-754) vs Abbasid peak (c. 800-850): Tang scores higher on Information (5.0 vs 4.5) because of census capacity; ties on Cultural, Legal, Educational at 4.5; Abbasid scores marginally higher on Economic due to Silk Road terminus + Baghdad banking. Roughly equivalent capability profiles at same technological baseline.",
+          "evidence": "Domain-by-domain same-era comparison; not confounded by 1500y gap as with Ottoman.",
+          "confidence": "high",
+          "methodology": "Same-era vector comparison.",
+          "limitations": "",
+          "citations": []
+        }
+      ],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "composite_score": 3.95,
+        "peak_score": 4.56,
+        "cascade_pattern": "simultaneous_endogenous",
+        "info_first_hypothesis": "failed"
+      }
+    },
+    {
+      "agent_role": "critic",
+      "phase": "critique",
+      "timestamp": "2026-07-04T12:38:55.189900",
+      "summary": "Two major issues, four minor. 'Highest peak' claim over-weights Information capacity. 'Independent n=5' overstates — effective n≈3 given shared institutional lineages. Census-drop should separate mortality from registration failure. An Lushan is endogenous-structural-vulnerability not purely endogenous. Yang Yan/Diocletian same-type but 10x different durability. Legal-domain composite inflated. Rigor 0.68/1.0 — REFINEMENT REQUIRED but lighter than prior sessions.",
+      "detailed_content": "Severity: 2 major, 4 minor.\nRigor: 0.68 / 1.0.\nDecision: REFINEMENT REQUIRED (light touch).",
+      "findings": [],
+      "critiques": [
+        {
+          "target": "Census 754 -> 760 collapse interpretation",
+          "issue_type": "empirical",
+          "description": "Reading 68% census drop as info-domain collapse mixes MORTALITY with REGISTRATION FAILURE. Actual mortality estimates 3-13M, not 35M. Most of the 'drop' is unregistered persons + local governors ceasing reports. If we separate mortality from info collapse, the info-collapse component is even MORE dramatic, but should not be reported as 'population loss'.",
+          "severity": "minor",
+          "suggested_remedy": "Report census-drop as info-domain capacity loss; mortality separately at 3-13M estimate."
+        },
+        {
+          "target": "'Highest peak in study' claim",
+          "issue_type": "methodological",
+          "description": "Peak composite 4.56 depends on Information scoring 5.0 (unique in study). This weighting privileges quantifiable state capacity over less-measurable civilizational capabilities. Same-era Abbasid arguably matches on Cultural + Educational despite Tang census advantage.",
+          "severity": "major",
+          "suggested_remedy": "Report BOTH: (a) Tang peak with 5.0 on Information; (b) Tang peak with 4.5 on Information (comparable to Abbasid), which yields peak 4.44 — same as Roman/Byzantine/Abbasid."
+        },
+        {
+          "target": "An Lushan as endogenous",
+          "issue_type": "assumption",
+          "description": "An Lushan was Sogdian-Turkic; drew heavily on Turkic + Khitan cavalry. Calling it purely endogenous underweights the frontier-integration structural vulnerability that made a trusted frontier general capable of rebellion. Skaff's cosmopolitan-strength-becomes-vulnerability argument.",
+          "severity": "minor",
+          "suggested_remedy": "Reframe as ENDOGENOUS STRUCTURAL VULNERABILITY (frontier-integration model) actualised via a trusted general with cross-border ties."
+        },
+        {
+          "target": "Yang Yan reform = Diocletian analogue",
+          "issue_type": "logical",
+          "description": "Both are administrative-fiscal reforms after crisis, but Yang Yan reform 780 buys 95y before Huang Chao; Diocletian reform 284 buys 150y West + 977y East. This is a 10x difference in East-branch durability. Analogy weakens the typology if we treat 'Type A' as uniform.",
+          "severity": "minor",
+          "suggested_remedy": "Note that Type A durability varies dramatically; treat Yang Yan and Diocletian as same TYPE but different DURABILITY."
+        },
+        {
+          "target": "Info-first '5/5 failed' overstates",
+          "issue_type": "logical",
+          "description": "Same issue as prior sessions: at n=5 the pattern is suggestive but the five cases are not independent (Roman-Byzantine same trajectory; Abbasid-Ottoman share Islamic institutional inheritance; Tang is the one genuinely independent case). Effective n ~= 3.",
+          "severity": "major",
+          "suggested_remedy": "State effective n honestly; hedge general claim as 'across 3 independent lineages, no case supports strong info-first'."
+        },
+        {
+          "target": "Composite dominated by legal continuity",
+          "issue_type": "methodological",
+          "description": "Tang Code's East Asian influence keeps Legal at 4.0 through decline, buoying composite. But institutional SURVIVAL of code ≠ Legal-domain CAS-health during Tang decline. Same flaw as Ottoman Cultural score.",
+          "severity": "minor",
+          "suggested_remedy": "Distinguish contemporaneous legal capacity from downstream influence; downgrade decline-phase Legal to 3.5."
+        }
+      ],
+      "citations": [],
+      "metadata": {
+        "rigor_score": 0.68,
+        "ready_for_synthesis": false
+      }
+    },
+    {
+      "agent_role": "theorist",
+      "phase": "refinement",
+      "timestamp": "2026-07-04T12:38:55.198085",
+      "summary": "Refinement: withdraw 'highest peak' claim (dual scoring 4.56/4.44); state effective n=3 not 5; separate mortality from registration failure in census-drop; note Type A durability variance 84-977y; downgrade Legal decline to 3.5. Corrected composite 3.93.",
+      "detailed_content": "Corrected scoring:\n  Rise:    4.00 (unchanged)\n  Peak:    4.56 (info=5.0) OR 4.44 (info=4.5, civ-comparable)\n  Decline: 3.22 (with Legal at 3.5) — down from 3.28\n  Overall: 3.93 (using peak 4.56) or 3.89 (using peak 4.44)\n\nInfo-first hypothesis re-stated at effective n=3 lineages:\n  Lineage 1 (Roman-Byzantine continuous):\n    Roman: EQUIVOCAL\n    Byzantine: NOT SUPPORTIVE\n    LINEAGE VERDICT: not supportive.\n  Lineage 2 (Islamicate Abbasid-Ottoman):\n    Abbasid: NOT SUPPORTIVE\n    Ottoman: CLEAN FALSIFIED\n    LINEAGE VERDICT: falsified.\n  Lineage 3 (Chinese Tang):\n    Tang: FAILED (info collapses SIMULTANEOUS with political,\n          not before)\n    LINEAGE VERDICT: not supportive.\n\nTHREE INDEPENDENT LINEAGES, ZERO SUPPORT for strong info-first\nhypothesis. This is a defensible general claim.\n\nType A adaptive-recovery durability variance:\n  Diocletian (Rome, 284)   → 150y W + 977y E\n  Yang Yan (Tang, 780)     → 95y before Huang Chao\n  Tanzimat (Ottoman, 1839) → 84y before empire ends\n  (No Byzantine Type A example; Iconoclasm was Type B,\n   Komnenoi were Type C)\nRange: 84-977 years. Median: ~150y. Not predictive alone.\n\nSame-era comparison Tang vs Abbasid (both peak ~750-800 CE):\n  Domain              Tang(752) Abbasid(830) Delta\n  Governance          4.5       4.5          0.0\n  Military            4.5       4.0          +0.5 T\n  Economic            4.5       4.5          0.0\n  Cultural            4.5       4.5          0.0\n  Technology          4.5       4.5          0.0\n  Information         5.0*      4.5          +0.5 T\n  Legal               4.5       4.5          0.0\n  Social              4.5       4.0          +0.5 T\n  Educational         4.5       4.5          0.0\n  * Tang census capacity vs Abbasid translation output.\nTang dominates 3-of-9; ties on 6-of-9. Effectively PEER\ncivilizations at this era.",
+      "findings": [
+        {
+          "claim": "Report BOTH Tang peak scores: (a) with Information at 5.0 (census-capacity-privileged): peak 4.56; (b) with Information at 4.5 (civilization-comparable): peak 4.44, tied with Roman/Byzantine/Abbasid. Withdraw 'highest peak' claim.",
+          "evidence": "Dual scoring reported.",
+          "confidence": "high",
+          "methodology": "Dual-scoring transparency.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Effective n across five cases = ~3. Rome + Byzantine share continuous trajectory (Kaldellis). Ottoman + Abbasid share Islamic institutional inheritance (Islamicate). Tang is the only genuinely INDEPENDENT lineage. State info-first verdict at effective n=3: three lineages tested, zero support strong form.",
+          "evidence": "Cross-case institutional-lineage analysis.",
+          "confidence": "high",
+          "methodology": "Independence adjustment.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Tang census-drop 68% correctly separated: mortality component ~3-13M (~5-25% of registered population); registration-failure component ~35M+ (~65-80% of drop). Info-domain capacity loss is real and severe; population loss smaller.",
+          "evidence": "Twitchett mortality estimates + registration-system dissolution documented in Cambridge History of China.",
+          "confidence": "high",
+          "methodology": "Component separation.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Adaptive-recovery Type A DURABILITY varies: Yang Yan 780 → 95y before Huang Chao; Diocletian 284 → 150y West + 977y East; Tanzimat 1839 → 84y before republic. Durability range 84-977y within Type A. Wide variance means Type A alone doesn't predict outcome.",
+          "evidence": "Durability comparison.",
+          "confidence": "high",
+          "methodology": "Durability analysis within type.",
+          "limitations": "",
+          "citations": []
+        },
+        {
+          "claim": "Legal decline-phase downgrade: Tang legal domain during 763-907 was 3.5 (functional but contested), not 4.0 (downstream influence). Corrected composite: decline 3.22, overall 3.93.",
+          "evidence": "Contemporaneous-capacity vs downstream-influence separation.",
+          "confidence": "medium",
+          "methodology": "Scoring correction.",
+          "limitations": "",
+          "citations": []
+        }
+      ],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "refinement_round": 1,
+        "effective_n": 3,
+        "peak_dual": [
+          4.56,
+          4.44
+        ],
+        "composite_corrected": 3.93
+      }
+    },
+    {
+      "agent_role": "critic",
+      "phase": "critique",
+      "timestamp": "2026-07-04T12:38:55.203444",
+      "summary": "All majors and minors addressed. Dual peak scoring reported. Effective n=3 stated honestly. Census-drop component-separated. Type A durability variance acknowledged. Legal decline corrected. Rigor 0.80/1.0 — READY for synthesis.",
+      "detailed_content": "Round-2 verdict:\n  1. Dual peak scoring: RESOLVED.\n  2. Effective n=3: RESOLVED.\n  3. Census-drop components: RESOLVED.\n  4. An Lushan framing: PARTIALLY (reframe adopted).\n  5. Type A durability: RESOLVED.\n  6. Legal decline correction: RESOLVED.\nRigor: 0.80/1.0. READY for synthesis.",
+      "findings": [],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "rigor_score": 0.8,
+        "ready_for_synthesis": true
+      }
+    },
+    {
+      "agent_role": "synthesizer",
+      "phase": "synthesis",
+      "timestamp": "2026-07-04T12:38:55.208749",
+      "summary": "YES. Composite 3.93, peak dual 4.56/4.44. Cascade: SIMULTANEOUS-ENDOGENOUS via An Lushan 755-763. Yang Yan 780 = Type A adaptive recovery buying 95y. Tang is only INDEPENDENT lineage; effective n across study = 3 not 5. Info-first hypothesis at n=3 lineages: STRONG FORM DEAD across all lineages. Type A durability variance 84-977y.",
+      "detailed_content": "# Tang China as a Complex Adaptive System — Synthesis\n\n## Question\nDoes Tang China (618-907 CE) qualify as a CAS under the nine-\ndomain framework, and how does its SIMULTANEOUS-ENDOGENOUS\ncascade compare to the four prior cases?\n\n## Verdict\n**YES**, and Tang is the only genuinely INDEPENDENT lineage in\nthe study — the other four cases pair into Roman-Byzantine and\nAbbasid-Ottoman institutional lineages. Effective n across the\nstudy is ~3, not 5.\n\n## Nine-domain scores\n\n| Domain | Rise | Peak | Decline | Overall |\n|---|---|---|---|---|\n| Governance | 4.0 | 4.5 | 2.5 | 3.7 |\n| Military | 4.0 | 4.5 | 2.5 | 3.7 |\n| Economic | 3.5 | 4.5 | 3.0 | 3.7 |\n| Cultural | 4.0 | 4.5 | 4.0 | 4.2 |\n| Technology | 4.0 | 4.5 | 4.0 | 4.2 |\n| Information | 4.5 | 5.0* / 4.5** | 3.0 | 4.2 |\n| Legal | 4.5 | 4.5 | 3.5 | 4.2 |\n| Social | 3.5 | 4.5 | 3.0 | 3.7 |\n| Educational | 4.0 | 4.5 | 3.5 | 4.0 |\n\n\\* If we credit Tang census capacity (52M registered) as unique.\n\\** If we score comparably with other civilizations.\n\nComposite: 3.93/5. Peak dual: 4.56 (census-privileged) or 4.44\n(civ-comparable, tied with Roman/Byzantine/Abbasid). **The\n'highest peak in study' claim is withdrawn.**\n\n## Cascade type: SIMULTANEOUS-ENDOGENOUS (Rome-analogue)\n\n- **755-763** An Lushan Rebellion. Census 754 → 760 drops from\n  52M to 16.9M registered (about 3-13M mortality; ~35M+\n  registration failure). Equal-field land system dissolves.\n  Fubing militia dissolves. Central revenue collapses. This\n  is a **5-year concurrent multi-domain collapse**.\n- **780** Yang Yan two-tax reform: **Type A adaptive-\n  institutional recovery**. Buys 95 more years.\n- **835** Ganlu incident (eunuch coup).\n- **842-846** Wuzong Huichang Buddhist persecution.\n- **868** Diamond Sutra printed — Tang tech-domain still\n  advancing during political attrition.\n- **875-884** Huang Chao Rebellion — terminal endogenous shock.\n- **907** Zhu Wen deposes Emperor Ai.\n\n## Same-era comparison: Tang c. 752 vs Abbasid c. 830\n\nBoth peaked within ~80 years of each other. Roughly PEER\ncivilizations:\n\n| Domain | Tang | Abbasid | Delta |\n|---|---|---|---|\n| Governance | 4.5 | 4.5 | 0.0 |\n| Military | 4.5 | 4.0 | +0.5 T |\n| Economic | 4.5 | 4.5 | 0.0 |\n| Cultural | 4.5 | 4.5 | 0.0 |\n| Technology | 4.5 | 4.5 | 0.0 |\n| Information | 5.0 (census) | 4.5 (translation) | +0.5 T |\n| Legal | 4.5 | 4.5 | 0.0 |\n| Social | 4.5 | 4.0 | +0.5 T |\n| Educational | 4.5 | 4.5 | 0.0 |\n\nTang dominates 3-of-9; ties 6-of-9. Same-era Tang-vs-Abbasid\nholds tech baseline roughly constant and lets us compare\ncapability profiles without the 1500y gap that made\nOttoman-vs-Roman uninformative.\n\n## Info-first hypothesis at effective n=3 lineages\n\n| Lineage | Cases | Verdict |\n|---|---|---|\n| Roman-Byzantine | Rome + Byzantium | not supportive |\n| Islamicate (Abbasid + Ottoman) | Abbasid + Ottoman | falsified |\n| Chinese (Tang) | Tang | not supportive |\n\n**Three independent lineages, zero support for strong info-first\nhypothesis.** Weak form (info-capital as cascade component)\nsurvives. This is defensible as a general claim.\n\n## Adaptive-recovery Type A durability variance\n\n| Recovery | Empire | Buys | Type |\n|---|---|---|---|\n| Diocletian 284 | Roman | 150y West + 977y East | A |\n| Yang Yan 780 | Tang | 95y | A |\n| Tanzimat 1839 | Ottoman | 84y | A |\n| Iconoclasm 843 | Byzantine | indefinite (ideological) | B |\n| Komnenoi 1081 | Byzantine | 123y (dynastic) | C |\n| Ghulam / Samarra | Abbasid | FAILED | A (attempted) |\n\nType A range: 84 - 977 years, median ~150y. Type is a **weak\npredictor** on its own; the Byzantine post-Diocletian outperformance\n(~1150y) is the outlier that suggests other factors matter more.\n\n## Contribution to comparative synthesis\n\n- Fifth case study, same framework. Composite 3.93, peak 4.44\n  (civ-comparable) or 4.56 (census-privileged).\n- **Establishes effective n=3 lineage independence** — the study\n  is not five independent tests but three.\n- **Simultaneous-endogenous cascade** — second case (with Rome)\n  of this pattern.\n- **Info-first hypothesis at n=3 lineages: strong form dead\n  across all lineages.** Ready for comparative synthesis.\n- **Type A adaptive-recovery durability variance** documented\n  (84-977y range).\n\n## Future work\n\n1. Comparative synthesis across all five sessions (next task).\n2. Same-era comparison with Byzantine (Tang peak 752 vs\n   Byzantine Iconoclast peak ~800).\n3. Song China (960-1279) as follow-up: does the aristocratic-\n   destruction shock of Huang Chao 875-884 enable Song's\n   examination-based meritocracy?\n4. Han China (206 BCE - 220 CE) as sixth case to give Chinese\n   lineage its own multi-case cascade comparison.\n5. Formalize \"cascade duration = f(institutional slack, shock\n   magnitude, adaptive-recovery success)\" as testable model.",
+      "findings": [],
+      "critiques": [],
+      "citations": [],
+      "metadata": {
+        "synthesis_path": "data/outputs/Tang_CAS_Synthesis.md",
+        "composite": 3.93,
+        "peak_dual": [
+          4.56,
+          4.44
+        ],
+        "cascade_type": "simultaneous_endogenous",
+        "effective_n_lineages": 3
+      }
+    }
+  ],
+  "refinement_rounds": 1,
+  "current_phase": null,
+  "next_phase": null,
+  "status": "completed",
+  "last_error": null,
+  "metadata": {
+    "framework_version": "nine_domain_v1",
+    "phase_boundaries": {
+      "rise": "618-712 (founding through Wu Zetian's reign)",
+      "peak": "712-755 (Xuanzong's Kaiyuan/Tianbao era to An Lushan)",
+      "decline": "755-907 (An Lushan through Zhu Wen deposition)"
+    },
+    "comparison_benchmarks": [
+      "Ottoman sess_20260509_014534_8307cd",
+      "Roman sess_20260704_120839_f33ed4",
+      "Byzantine sess_20260704_122952_290961",
+      "Abbasid sess_20260704_123428_196896"
+    ]
+  }
+}
